@@ -6,13 +6,13 @@ export default {
   input: "src/index.js",
   output: [
     {
-      file: `dist/heex@${pkg.version}.js`,
+      file: `dist/${pkg.version}/heex.js`,
       format: "umd",
       name: "Heex",
       sourcemap: true,
     },
     {
-      file: `dist/heex@${pkg.version}.min.js`,
+      file: `dist/${pkg.version}/heex.min.js`,
       format: "umd",
       plugins: [terser()],
       name: "Heex",
