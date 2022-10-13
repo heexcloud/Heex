@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
-import { HeexCommentEditor } from "./components";
+import { CommentEditor } from "./components";
 import "./index.scss";
 
 const defaultOptions = {
@@ -32,6 +32,6 @@ export default class Heex {
     this.options = _options;
     this.rootElement = document.querySelector(this.options.rootElement);
     this.root = ReactDOMClient.createRoot(this.rootElement);
-    this.root.render(<HeexCommentEditor />);
+    this.root.render(<CommentEditor />);
   }
 }
