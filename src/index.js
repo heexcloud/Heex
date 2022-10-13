@@ -30,6 +30,10 @@ export default class Heex {
 
   constructor(_options) {
     this.options = _options;
+    this.render();
+  }
+
+  render() {
     this.rootElement = document.querySelector(this.options.rootElement);
     this.root = ReactDOMClient.createRoot(this.rootElement);
     this.root.render(<CommentEditor />);

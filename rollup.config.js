@@ -29,7 +29,10 @@ export default {
   plugins: [
     json(),
     replace({
-      "process.env.NODE_ENV": JSON.stringify("production"),
+      values: {
+        "process.env.NODE_ENV": '"production"',
+      },
+      preventAssignment: true,
     }),
     scss({
       sourceMap: true,
