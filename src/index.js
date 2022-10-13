@@ -21,7 +21,7 @@ export default class Heex {
       Heex._instance = new Heex(_options);
     }
 
-    return Object.freeze(Heex._instance);
+    return Heex._instance;
   }
 
   options = {};
