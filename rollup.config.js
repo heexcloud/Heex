@@ -5,6 +5,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import nodePolyfills from "rollup-plugin-polyfill-node";
 import scss from "rollup-plugin-scss";
+import bundleSize from "rollup-plugin-bundle-size";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default {
   input: "src/index.js",
@@ -36,5 +38,7 @@ export default {
     babel({ babelHelpers: "bundled", include: ["**/*.js", "**/*.jsx"] }),
     commonjs(),
     nodePolyfills({ sourceMap: true }),
+    bundleSize(),
+    visualizer(),
   ],
 };
