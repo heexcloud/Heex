@@ -7,6 +7,7 @@ import nodePolyfills from "rollup-plugin-polyfill-node";
 import scss from "rollup-plugin-scss";
 import bundleSize from "rollup-plugin-bundle-size";
 import { visualizer } from "rollup-plugin-visualizer";
+import replace from "@rollup/plugin-replace";
 
 export default {
   input: "src/index.js",
@@ -27,6 +28,9 @@ export default {
   ],
   plugins: [
     json(),
+    replace({
+      "process.env.NODE_ENV": JSON.stringify("production"),
+    }),
     scss({
       sourceMap: true,
       outputStyle: "compressed",
