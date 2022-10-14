@@ -1,44 +1,52 @@
-.heex-editor-container {
-    width: 100%;
-
+.heex-container {
     display: flex;
     flex-direction: column;
-}
 
-.heex-editor-header {
-    width: 100%;
+    .heex-editor-container {
+        width: 100%;
 
-    display: flex;
-    flex-direction: row;
-    .heex-user-info {
-        flex-grow: 1;
-        flex-shrink: 0;
-    }
-}
-
-.heex-editor-footer {
-    width: 100%;
-
-    .heex-button {
-        width: 4rem;
-        display: inline-block;
-        vertical-align: middle;
-        min-width: 2.5em;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .heex-editor-header {
         display: flex;
         flex-direction: column;
 
-        .heex-user-info {
+        .heex-editor-header {
             width: 100%;
-            padding: 1px;
+
+            display: flex;
+            flex-direction: row;
+
+            .heex-user-info {
+                flex-grow: 1;
+                flex-shrink: 0;
+            }
+        }
+
+        .heex-editor-footer {
+            width: 100%;
+
+            .heex-button {
+                width: 4rem;
+                display: inline-block;
+                vertical-align: middle;
+                min-width: 2.5em;
+            }
         }
     }
 
-    .heex-editor-body {
-        width: 100%;
+    @media screen and (max-width: 600px) {
+        .heex-editor-container {
+            .heex-editor-header {
+                display: flex;
+                flex-direction: column;
+
+                .heex-user-info {
+                    width: 100%;
+                    padding: 1px;
+                }
+            }
+
+            .heex-editor-body {
+                width: 100%;
+            }
+        }
     }
 }
