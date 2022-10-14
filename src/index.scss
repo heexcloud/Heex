@@ -12,11 +12,8 @@
     flex-direction: row;
     .heex-user-info {
         flex-grow: 1;
+        flex-shrink: 0;
     }
-}
-
-.heex-editor-body {
-    width: 100%;
 }
 
 .heex-editor-footer {
@@ -39,5 +36,9 @@
             width: 100%;
             padding: 1px;
         }
+    }
+
+    .heex-editor-body {
+        width: 100%;
     }
 }
