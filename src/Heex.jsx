@@ -1,7 +1,8 @@
 import React from "react";
 import { CommentEditor, CommentList, CommentMeta } from "./components";
+import "./heex.scss";
 
-export const Heex = () => {
+export const HeexComponent = () => {
     return (
         <div className="heex-container">
             <CommentEditor />
