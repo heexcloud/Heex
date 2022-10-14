@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
-import { HeexComponent } from "./Heex";
+import { Heex } from "./Heex";
 
 const defaultOptions = {
     rootElement: "#heex",
@@ -9,18 +9,18 @@ const defaultOptions = {
     appId: "aGVleC1kZW1v", // just some random string so that api knows which is which
 };
 
-export default class Heex {
+export default class Singleton {
     static _instance;
 
     static init(opts) {
         // allow user just overwrites a part of the default options
         const _opts = opts ? { ...defaultOptions, ...opts } : defaultOptions;
 
-        if (!Heex._instance) {
-            Heex._instance = new Heex(_opts);
+        if (!Singleton._instance) {
+            Singleton._instance = new Singleton(_opts);
         }
 
-        return Heex._instance;
+        return Singleton._instance;
     }
 
     _options = {};
@@ -35,6 +35,6 @@ export default class Heex {
     _render() {
         this._rootElement = document.querySelector(this._options.rootElement);
         this._root = ReactDOMClient.createRoot(this._rootElement);
-        this._root.render(<HeexComponent />);
+        this._root.render(<Heex />);
     }
 }
