@@ -6,7 +6,7 @@ const defaultOptions = {
     rootElement: "#heex",
     apiBaseUrl: "https://heex-api-lambda.netlify.app",
     appName: "heex-demo",
-    appId: "aGVleC1kZW1v", // just some random string so that api can know which is which
+    appId: "aGVleC1kZW1v", // just some random string so that api knows which is which
 };
 
 export default class Heex {
