@@ -1,0 +1,14 @@
+# coverage
+coverage/
+
+# output files
+dist/
+
+# temp files
+.temp/
+.cache/
+*.log
+
+
+package-lock.json
+yarn.lock
