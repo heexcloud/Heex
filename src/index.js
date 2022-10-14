@@ -14,27 +14,27 @@ export default class Heex {
 
     static init(opts) {
         // allow user just overwrites a part of the default options
-        const _options = opts ? { ...defaultOptions, ...opts } : defaultOptions;
+        const _opts = opts ? { ...defaultOptions, ...opts } : defaultOptions;
 
         if (!Heex._instance) {
-            Heex._instance = new Heex(_options);
+            Heex._instance = new Heex(_opts);
         }
 
         return Heex._instance;
     }
 
-    options = {};
-    rootElement = null;
-    root = null;
+    _options = {};
+    _rootElement = null;
+    _root = null;
 
-    constructor(_options) {
-        this.options = _options;
-        this.render();
+    constructor(options) {
+        this._options = options;
+        this._render();
     }
 
-    render() {
-        this.rootElement = document.querySelector(this.options.rootElement);
-        this.root = ReactDOMClient.createRoot(this.rootElement);
-        this.root.render(<HeexComponent />);
+    _render() {
+        this._rootElement = document.querySelector(this._options.rootElement);
+        this._root = ReactDOMClient.createRoot(this._rootElement);
+        this._root.render(<HeexComponent />);
     }
 }
