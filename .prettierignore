@@ -1,5 +1,6 @@
 # coverage
 coverage/
+node_modules/
 
 # output files
 dist/
