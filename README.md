@@ -1,6 +1,12 @@
 ### Heex
 
-- a versatile mordern commenting system
-- Heex means HEated EXchange, since people tend to do it on Internet, but I do hope we could have civilized conversations
+-   yet another commenting system
+-   Heex means HEated EXchange, since people tend to do it on Internet, but I do hope we could have civilized conversations
+-   it has a very flexible architecture. For example, you can override the default styles, and you have plenty of options for api server implementations
 
-#### [Documentation](https://github.com/JekyllCloud/heex-docs)
+### [Documentation](https://heex.jekyllcloud.com)
+
+### Community
+
+-   Email: heex@jekyllcloud.com
+-   [Github Discussions](https://github.com/JekyllCloud/Heex/discussions)
