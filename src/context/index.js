@@ -6,11 +6,11 @@ const HeexContext = createContext();
 const initialState = { page: 1, commentTotalCount: 0 };
 
 export const HeexContextProvider = (props) => {
-    const { children } = props;
+    const { children, _options } = props;
 
     const [state, dispatch] = useReducer(reducer, {
         ...initialState,
-        _options: props._options,
+        _options,
     });
 
     return (
