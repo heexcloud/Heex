@@ -4,9 +4,9 @@ import { Heex } from "./Heex";
 
 const defaultOptions = {
     rootElement: "#heex",
-    apiBaseUrl: "https://heex-api-lambda.netlify.app",
-    appName: "heex-demo",
-    appId: "aGVleC1kZW1v", // just some random string so that api knows which is which
+    apiBaseUrl: "https://s.heex.dev",
+    appName: "heex-dogfooding",
+    appId: "aGVleC1kb2dmb29kaW5n", // just some random string so that api knows which is which
 };
 
 export default class Singleton {
