@@ -1,23 +1,35 @@
 import React, { useCallback } from "react";
 import { query } from "../../utils";
+import { useHeexContext, ACTION } from "../../context";
 
 export const CommentEditor = () => {
-    const handleCreateComment = useCallback(() => {
-        const username = document.querySelector("input[name='username']").value;
-        const email = document.querySelector("input[name='email']").value;
-        const comment = document.querySelector(
-            "textarea[name='comment']"
-        ).value;
+    const { dispatch } = useHeexContext();
+
+    const handleCreateComment = useCallback(async () => {
+        const username = document
+            .querySelector("input[name='username']")
+            .value.trim();
+        const email = document
+            .querySelector("input[name='email']")
+            .value.trim();
+        const comment = document.querySelector("textarea").value.trim();
 
         if (!username || !email || !comment) return;
 
-        query
-            .createComment({ username, email, comment })
-            .then((res) => {
-                console.log("res :>> ", res);
-            })
-            .catch((err) => console.error(err));
-    }, []);
+        const result = await query.createComment({ username, email, comment });
+        if (result === undefined) {
+            return;
+        }
+
+        dispatch({
+            type: ACTION.SET_COMMENT_COUNT,
+            payload: { commentTotalCount: result.count },
+        });
+
+        document.querySelector("input[name='username']").value = "";
+        document.querySelector("input[name='email']").value = "";
+        document.querySelector("textarea").value = "";
+    }, [dispatch]);
 
     return (
         <div className="heex-editor-container">

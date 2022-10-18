@@ -12,6 +12,11 @@ export const reducer = (state, action) => {
                 ...state,
                 comments: [...state.comments, ...payload.comments],
             };
+        case ACTION.SET_COMMENT_COUNT:
+            return {
+                ...state,
+                commentTotalCount: payload.commentTotalCount,
+            };
         default:
             return state;
     }

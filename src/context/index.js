@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { reducer } from "./reducer";
+import { ACTION } from "./action";
 
 const HeexContext = createContext();
 
@@ -21,3 +22,4 @@ export const HeexContextProvider = (props) => {
 };
 
 export const useHeexContext = () => useContext(HeexContext);
+export { ACTION };
