@@ -15,10 +15,11 @@ export const CommentEditor = () => {
                     name="email"
                 />
             </div>
-            <textarea className="heex-editor-body" />
-            <div className="heex-editor-footer">
-                <button className="heex-button">Submit</button>
+            <div className="heex-editor-body">
+                <textarea />
+                <button className="heex-submit-comment-button">Submit</button>
             </div>
+            <div className="heex-editor-footer"></div>
         </div>
     );
 };

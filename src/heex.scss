@@ -20,15 +20,34 @@
             }
         }
 
-        .heex-editor-footer {
-            width: 100%;
+        .heex-editor-body {
+            border: 1px solid black;
 
+            & > textarea {
+                width: 100%;
+
+                border: none;
+                overflow: auto;
+                outline: none;
+
+                box-sizing: border-box;
+
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+
+                resize: none; /*remove the resize handle on the bottom right*/
+            }
             .heex-button {
                 width: 4rem;
                 display: inline-block;
                 vertical-align: middle;
                 min-width: 2.5em;
             }
+        }
+
+        .heex-editor-footer {
+            width: 100%;
         }
     }
 
@@ -37,15 +56,6 @@
             .heex-editor-header {
                 display: flex;
                 flex-direction: column;
-
-                .heex-user-info {
-                    width: 100%;
-                    padding: 1px;
-                }
-            }
-
-            .heex-editor-body {
-                width: 100%;
             }
         }
     }
