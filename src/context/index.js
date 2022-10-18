@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useReducer } from "react";
-import reducer from "./reducer";
+import { reducer } from "./reducer";
 
 const HeexContext = createContext();
 
-const initialState = { page: 1, commentTotalCount: 0 };
+const initialState = { page: 1, commentTotalCount: 0, comments: [] };
 
 export const HeexContextProvider = (props) => {
     const { children, _options } = props;

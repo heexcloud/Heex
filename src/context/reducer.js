@@ -7,6 +7,11 @@ export const reducer = (state, action) => {
             return { ...state, page: payload.page };
         case ACTION.PAGE_INCR:
             return { ...state, page: state.page + 1 };
+        case ACTION.APPEND_COMMENTS:
+            return {
+                ...state,
+                comments: [...state.comments, ...payload.comments],
+            };
         default:
             return state;
     }
