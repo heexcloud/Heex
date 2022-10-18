@@ -4,9 +4,9 @@ import { Heex } from "./Heex";
 
 const defaultOptions = {
     rootElement: "#heex",
-    apiBaseUrl: "https://s.heex.dev",
-    appName: "heex-dogfooding",
-    appId: "aGVleC1kb2dmb29kaW5n", // just some random string so that api knows which is which
+    apiBaseUrl: "https://heex-api-nextjs.vercel.app",
+    clientName: "heex-dogfooding",
+    clientId: "aGVleC1kb2dmb29kaW5n", // just some random string so that api knows which is which
 };
 
 export default class Singleton {
@@ -15,6 +15,10 @@ export default class Singleton {
     static init(opts) {
         // allow user just overwrites a part of the default options
         const _opts = opts ? { ...defaultOptions, ...opts } : defaultOptions;
+
+        if (typeof window !== "undefined") {
+            window.HeexOptions = _opts;
+        }
 
         if (!Singleton._instance) {
             Singleton._instance = new Singleton(_opts);
