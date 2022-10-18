@@ -39,6 +39,6 @@ export default class Singleton {
     _render() {
         this._rootElement = document.querySelector(this._options.rootElement);
         this._root = ReactDOMClient.createRoot(this._rootElement);
-        this._root.render(<Heex _options={this._options} />);
+        this._root.render(<Heex />);
     }
 }

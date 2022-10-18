@@ -3,9 +3,9 @@ import { CommentEditor, CommentList, CommentMeta } from "./components";
 import "./heex.scss";
 import { HeexContextProvider } from "./context";
 
-export const Heex = (props) => {
+export const Heex = () => {
     return (
-        <HeexContextProvider {...props}>
+        <HeexContextProvider>
             <div className="heex-container">
                 <CommentEditor />
                 <CommentMeta />
