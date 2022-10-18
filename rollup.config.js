@@ -10,42 +10,42 @@ import { visualizer } from "rollup-plugin-visualizer";
 import replace from "@rollup/plugin-replace";
 
 export default {
-  input: "src/index.js",
-  output: [
-    {
-      file: "dist/heex.js",
-      format: "umd",
-      name: "Heex",
-      sourcemap: true,
-    },
-    {
-      file: "dist/heex.min.js",
-      format: "umd",
-      plugins: [terser()],
-      name: "Heex",
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    json(),
-    replace({
-      values: {
-        "process.env.NODE_ENV": '"production"',
-      },
-      preventAssignment: true,
-    }),
-    scss({
-      sourceMap: true,
-      outputStyle: "compressed",
-    }),
-    nodeResolve({
-      extensions: [".js", ".jsx"],
-      browser: true,
-    }),
-    babel({ babelHelpers: "bundled", include: ["**/*.js", "**/*.jsx"] }),
-    commonjs(),
-    nodePolyfills({ sourceMap: true }),
-    bundleSize(),
-    visualizer(),
-  ],
+    input: "src/index.js",
+    output: [
+        {
+            file: "dist/umd/heex.js",
+            format: "umd",
+            name: "Heex",
+            sourcemap: true,
+        },
+        {
+            file: "dist/umd/heex.min.js",
+            format: "umd",
+            plugins: [terser()],
+            name: "Heex",
+            sourcemap: true,
+        },
+    ],
+    plugins: [
+        json(),
+        replace({
+            values: {
+                "process.env.NODE_ENV": '"production"',
+            },
+            preventAssignment: true,
+        }),
+        scss({
+            sourceMap: true,
+            outputStyle: "compressed",
+        }),
+        nodeResolve({
+            extensions: [".js", ".jsx"],
+            browser: true,
+        }),
+        babel({ babelHelpers: "bundled", include: ["**/*.js", "**/*.jsx"] }),
+        commonjs(),
+        nodePolyfills({ sourceMap: true }),
+        bundleSize(),
+        visualizer(),
+    ],
 };
