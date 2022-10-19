@@ -41,7 +41,7 @@ export const getComments = async function () {
             `${apiBaseUrl}/api/v1/comments?pageId=${pageId}`
         );
         const json = await response.json();
-        return json.data.results;
+        return json.data.comments;
     } catch (err) {
         console.error(err);
     }
