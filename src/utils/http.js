@@ -11,8 +11,21 @@ export const createComment = async function (payload) {
         });
 
         const json = await response.json();
-        return json;
+        return json.data;
     } catch (err) {
         console.error(err);
     }
+};
+
+export const getCommentCount = async function () {
+    const { apiBaseUrl } = window.HeexOptions;
+
+    try {
+        const response = await fetch(`${apiBaseUrl}/api/v1/comment/count`);
+        const json = await response.json();
+        return json.data.count;
+    } catch (err) {
+        console.error(err);
+    }
+    return 0;
 };

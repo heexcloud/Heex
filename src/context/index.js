@@ -4,7 +4,7 @@ import { ACTION } from "./action";
 
 const HeexContext = createContext();
 
-const initialState = { page: 1, commentTotalCount: 0, comments: [] };
+const initialState = { page: 1, commentCount: 0, comments: [] };
 
 export const HeexContextProvider = (props) => {
     const { children } = props;

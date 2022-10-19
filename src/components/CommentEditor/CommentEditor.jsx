@@ -17,13 +17,12 @@ export const CommentEditor = () => {
         if (!username || !email || !comment) return;
 
         const result = await query.createComment({ username, email, comment });
-        if (result === undefined) {
-            return;
-        }
+        if (result === undefined) return;
 
+        console.log("result :>> ", result);
         dispatch({
             type: ACTION.SET_COMMENT_COUNT,
-            payload: { commentTotalCount: result.count },
+            payload: { commentCount: result.count },
         });
 
         document.querySelector("input[name='username']").value = "";
