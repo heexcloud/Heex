@@ -32,3 +32,18 @@ export const getCommentCount = async function () {
     }
     return 0;
 };
+
+export const getComments = async function () {
+    const { apiBaseUrl } = window.HeexOptions;
+    try {
+        const pageId = window.location.pathname;
+        const response = await fetch(
+            `${apiBaseUrl}/api/v1/comments?pageId=${pageId}`
+        );
+        const json = await response.json();
+        return json.data.results;
+    } catch (err) {
+        console.error(err);
+    }
+    return [];
+};

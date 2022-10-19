@@ -1,25 +1,8 @@
-import React, { useEffect } from "react";
-import { ACTION, useHeexContext } from "../../context";
-import { query } from "../../utils";
+import React from "react";
+import { useHeexContext } from "../../context";
 
 export const CommentMeta = () => {
-    const { state, dispatch } = useHeexContext();
-
-    useEffect(() => {
-        query
-            .getCommentCount()
-            .then((res) => {
-                dispatch({
-                    type: ACTION.SET_COMMENT_COUNT,
-                    payload: {
-                        commentCount: res,
-                    },
-                });
-            })
-            .catch((err) => {
-                console.log("err :>> ", err);
-            });
-    }, []);
+    const { state } = useHeexContext();
 
     return (
         <div className="heex-comment-meta">
