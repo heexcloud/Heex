@@ -16,10 +16,14 @@ export const CommentEditor = () => {
 
         if (!username || !email || !comment) return;
 
-        const result = await query.createComment({ username, email, comment });
+        const result = await query.createComment({
+            username,
+            email,
+            comment,
+            pageId: window.location.pathname,
+        });
         if (result === undefined) return;
 
-        console.log("result :>> ", result);
         dispatch({
             type: ACTION.SET_COMMENT_COUNT,
             payload: { commentCount: result.count },

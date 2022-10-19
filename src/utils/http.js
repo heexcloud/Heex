@@ -21,7 +21,10 @@ export const getCommentCount = async function () {
     const { apiBaseUrl } = window.HeexOptions;
 
     try {
-        const response = await fetch(`${apiBaseUrl}/api/v1/comment/count`);
+        const pageId = window.location.pathname;
+        const response = await fetch(
+            `${apiBaseUrl}/api/v1/comment/count?pageId=${pageId}`
+        );
         const json = await response.json();
         return json.data.count;
     } catch (err) {
