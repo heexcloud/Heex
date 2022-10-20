@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { query } from "../../utils";
 import { ACTION, useHeexContext } from "../../context";
 import { useMemoizedFn } from "../../hooks";
+import { CommentEditor } from "../CommentEditor";
 
 export const CommentList = () => {
     const { state, dispatch } = useHeexContext();
@@ -40,23 +41,29 @@ export const CommentList = () => {
         <div className="heex-comment-list">
             {state.comments.map((comment) => {
                 return (
-                    <div className="heex-comment-list-item">
-                        <div>{comment.username}</div>
-                        <div>{comment.comment}</div>
-                        <div>{comment.createdAt}</div>
-                        <button
-                            onClick={() =>
-                                toggleReplyEditor({
-                                    cid: comment.objectId,
-                                    at: comment.username,
-                                })
-                            }
-                        >
-                            Reply
-                        </button>
-                        {replyEditor?.cid === comment.objectId && (
-                            <div>Reply editor</div>
-                        )}
+                    <div
+                        className="heex-comment-list-item"
+                        key={comment.objectId}
+                    >
+                        <div className="heex-comment-thread-root">
+                            <div>{comment.username}</div>
+                            <div>{comment.comment}</div>
+                            <div>{comment.createdAt}</div>
+                            <button
+                                onClick={() =>
+                                    toggleReplyEditor({
+                                        cid: comment.objectId,
+                                        at: comment.username,
+                                    })
+                                }
+                            >
+                                Reply
+                            </button>
+                            {replyEditor?.cid === comment.objectId && (
+                                <CommentEditor thread={comment} />
+                            )}
+                        </div>
+                        <div className="heex-comment-thread-reply"></div>
                     </div>
                 );
             })}

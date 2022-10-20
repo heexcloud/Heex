@@ -1,26 +1,32 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { query } from "../../utils";
 import { useHeexContext, ACTION } from "../../context";
+import { useMemoizedFn } from "../../hooks";
 
-export const CommentEditor = () => {
+export const CommentEditor = (props) => {
     const { dispatch } = useHeexContext();
+    const { thread, reply } = props;
+    const editorId = thread ? thread.objectId : "Heex";
 
-    const handleCreateComment = useCallback(async () => {
-        const username = document
-            .querySelector("input[name='username']")
-            .value.trim();
-        const email = document
-            .querySelector("input[name='email']")
-            .value.trim();
-        const comment = document.querySelector("textarea").value.trim();
+    const handleCreateComment = useMemoizedFn(async () => {
+        const usernameSelector = `#comment-editor-${editorId} input[name='username']`;
+        const emailSelector = `#comment-editor-${editorId} input[name='email']`;
+        const commentSelector = `#comment-editor-${editorId} textarea`;
+
+        const username = document.querySelector(usernameSelector).value.trim();
+        const email = document.querySelector(emailSelector).value.trim();
+        const comment = document.querySelector(commentSelector).value.trim();
 
         if (!username || !email || !comment) return;
 
         const result = await query.createComment({
             username,
             email,
-            comment,
             pageId: window.location.pathname,
+            comment,
+            tid: thread?.objectId,
+            rid: reply?.objectId,
+            at: reply?.username || thread?.username,
         });
         if (result === undefined) return;
 
@@ -29,13 +35,16 @@ export const CommentEditor = () => {
             payload: { commentCount: result.count },
         });
 
-        document.querySelector("input[name='username']").value = "";
-        document.querySelector("input[name='email']").value = "";
-        document.querySelector("textarea").value = "";
-    }, [dispatch]);
+        document.querySelector(usernameSelector).value = "";
+        document.querySelector(emailSelector).value = "";
+        document.querySelector(commentSelector).value = "";
+    });
 
     return (
-        <div className="heex-editor-container">
+        <div
+            id={`comment-editor-${editorId}`}
+            className="heex-editor-container"
+        >
             <div className="heex-editor-header">
                 <input
                     className="heex-user-info"
