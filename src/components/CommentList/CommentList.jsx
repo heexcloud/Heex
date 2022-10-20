@@ -17,20 +17,25 @@ export const CommentList = () => {
     });
 
     useEffect(() => {
-        query.getComments().then((comments) => {
-            dispatch({
-                type: ACTION.SET_COMMENT_COUNT,
-                payload: {
-                    commentCount: comments.length,
-                },
-            });
-            dispatch({
-                type: ACTION.APPEND_COMMENTS,
-                payload: {
-                    comments,
-                },
-            });
-        });
+        // * leancloud can get count and comments in one query,
+        // * but I am not sure whether other database can do that too
+        Promise.all([query.getCommentCount(), query.getComments()]).then(
+            (res) => {
+                const [count, comments] = res;
+                dispatch({
+                    type: ACTION.SET_COMMENT_COUNT,
+                    payload: {
+                        commentCount: count,
+                    },
+                });
+                dispatch({
+                    type: ACTION.APPEND_COMMENTS,
+                    payload: {
+                        comments,
+                    },
+                });
+            }
+        );
     }, []);
 
     return (
