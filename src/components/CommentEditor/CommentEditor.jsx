@@ -5,30 +5,35 @@ import { useMemoizedFn } from "../../hooks";
 
 export const CommentEditor = (props) => {
     const { dispatch } = useHeexContext();
-    const { thread, reply } = props;
+    const { thread, reply, onSubmitSuccess, onSubmitFailure } = props;
     const editorId = reply?.objectId || thread?.objectId || "Heex";
 
     const handleCreateComment = useMemoizedFn(async () => {
         const usernameSelector = `#comment-editor-${editorId} input[name='username']`;
         const emailSelector = `#comment-editor-${editorId} input[name='email']`;
-        const commentSelector = `#comment-editor-${editorId} textarea`;
+        const commentContentSelector = `#comment-editor-${editorId} textarea[name='commentContent']`;
 
         const username = document.querySelector(usernameSelector).value.trim();
         const email = document.querySelector(emailSelector).value.trim();
-        const comment = document.querySelector(commentSelector).value.trim();
+        const commentContent = document
+            .querySelector(commentContentSelector)
+            .value.trim();
 
-        if (!username || !email || !comment) return;
+        if (!username || !email || !commentContent) return;
 
         const result = await query.createComment({
             username,
             email,
             pageId: window.location.pathname,
-            comment,
+            comment: commentContent,
             tid: thread?.objectId,
             rid: reply?.objectId,
             at: reply?.username || thread?.username,
         });
-        if (result === undefined) return;
+        if (result === undefined) {
+            onSubmitFailure && onSubmitFailure();
+            return;
+        }
 
         dispatch({
             type: ACTION.SET_COMMENT_COUNT,
@@ -37,7 +42,8 @@ export const CommentEditor = (props) => {
 
         document.querySelector(usernameSelector).value = "";
         document.querySelector(emailSelector).value = "";
-        document.querySelector(commentSelector).value = "";
+        document.querySelector(commentContentSelector).value = "";
+        onSubmitSuccess && onSubmitSuccess();
     });
 
     return (
@@ -58,7 +64,7 @@ export const CommentEditor = (props) => {
                 />
             </div>
             <div className="heex-editor-body">
-                <textarea required name="comment" />
+                <textarea required name="commentContent" />
                 <button
                     onClick={handleCreateComment}
                     className="heex-submit-comment-button"

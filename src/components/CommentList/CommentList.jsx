@@ -17,24 +17,20 @@ export const CommentList = () => {
     });
 
     useEffect(() => {
-        Promise.all([query.getCommentCount(), query.getComments()]).then(
-            (res) => {
-                const [count, comments] = res;
-
-                dispatch({
-                    type: ACTION.SET_COMMENT_COUNT,
-                    payload: {
-                        commentCount: count,
-                    },
-                });
-                dispatch({
-                    type: ACTION.APPEND_COMMENTS,
-                    payload: {
-                        comments,
-                    },
-                });
-            }
-        );
+        query.getComments().then((comments) => {
+            dispatch({
+                type: ACTION.SET_COMMENT_COUNT,
+                payload: {
+                    commentCount: comments.length,
+                },
+            });
+            dispatch({
+                type: ACTION.APPEND_COMMENTS,
+                payload: {
+                    comments,
+                },
+            });
+        });
     }, []);
 
     return (
@@ -60,7 +56,10 @@ export const CommentList = () => {
                                 Reply
                             </button>
                             {replyEditor?.cid === comment.objectId && (
-                                <CommentEditor thread={comment} />
+                                <CommentEditor
+                                    thread={comment}
+                                    onSubmitSuccess={setReplyEditor}
+                                />
                             )}
                         </div>
                         <div className="heex-comment-thread-reply"></div>
