@@ -6,7 +6,7 @@ import { useMemoizedFn } from "../../hooks";
 export const CommentEditor = (props) => {
     const { dispatch } = useHeexContext();
     const { thread, reply } = props;
-    const editorId = reply?.objectId ? thread?.objectId : "Heex";
+    const editorId = reply?.objectId || thread?.objectId || "Heex";
 
     const handleCreateComment = useMemoizedFn(async () => {
         const usernameSelector = `#comment-editor-${editorId} input[name='username']`;
