@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "build": "rollup --config",
-        "dev": "rollup --config --watch"
+        "watch": "rollup --config --watch"
     },
     "dependencies": {
         "react": "^18.2.0",
