@@ -1,9 +1,16 @@
 {
     "name": "heex",
-    "version": "0.0.1",
-    "main": "index.js",
+    "version": "0.0.2",
+    "main": "dist/heex.js",
     "license": "MIT",
     "type": "module",
+    "files": [
+        "package.json",
+        "yarn.lock",
+        "dist",
+        "README.md",
+        "rollup.config.js"
+    ],
     "scripts": {
         "build": "rollup --config",
         "dev": "rollup --config --watch"
