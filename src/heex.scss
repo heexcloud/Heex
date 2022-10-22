@@ -38,16 +38,17 @@
 
                 resize: none; /*remove the resize handle on the bottom right*/
             }
-            .heex-button {
+        }
+
+        .heex-editor-footer {
+            width: 100%;
+
+            .heex-editor-submit-button {
                 width: 4rem;
                 display: inline-block;
                 vertical-align: middle;
                 min-width: 2.5em;
             }
-        }
-
-        .heex-editor-footer {
-            width: 100%;
         }
     }
 

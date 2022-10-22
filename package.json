@@ -14,6 +14,7 @@
     "scripts": {
         "build": "rollup --config",
         "watch": "rollup --config --watch",
+        "serve": "serve .",
         "release": "release-it"
     },
     "dependencies": {

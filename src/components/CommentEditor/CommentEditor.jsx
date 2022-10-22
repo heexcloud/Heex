@@ -65,14 +65,15 @@ export const CommentEditor = (props) => {
             </div>
             <div className="heex-editor-body">
                 <textarea required name="commentContent" />
+            </div>
+            <div className="heex-editor-footer">
                 <button
                     onClick={handleCreateComment}
-                    className="heex-submit-comment-button"
+                    className="heex-editor-submit-button"
                 >
                     Submit
                 </button>
             </div>
-            <div className="heex-editor-footer"></div>
         </div>
     );
 };
