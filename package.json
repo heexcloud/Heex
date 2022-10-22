@@ -13,7 +13,8 @@
     ],
     "scripts": {
         "build": "rollup --config",
-        "watch": "rollup --config --watch"
+        "watch": "rollup --config --watch",
+        "release": "release-it"
     },
     "dependencies": {
         "react": "^18.2.0",
@@ -28,6 +29,7 @@
         "@rollup/plugin-json": "^5.0.0",
         "@rollup/plugin-node-resolve": "^15.0.0",
         "@rollup/plugin-replace": "^5.0.0",
+        "release-it": "^15.5.0",
         "rollup": "^3.0.0",
         "rollup-plugin-bundle-size": "^1.0.3",
         "rollup-plugin-polyfill-node": "^0.10.2",
