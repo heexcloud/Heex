@@ -10,7 +10,6 @@
 
 ### Community
 
--   Email: heex@jekyllcloud.com
 -   [Github Discussions](https://github.com/JekyllCloud/Heex/discussions)
 
 ### License
