@@ -1,4 +1,4 @@
-.PHONY: release
+.PHONY: build release
 
 build:
 	yarn build
