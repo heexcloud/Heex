@@ -5,12 +5,12 @@ import { HeexContextProvider } from "./context";
 
 export const Heex = () => {
     return (
-        <HeexContextProvider>
-            <div className="heex-container">
+        <div className="heex-container">
+            <HeexContextProvider>
                 <CommentEditor />
                 <CommentMeta />
                 <CommentList />
-            </div>
-        </HeexContextProvider>
+            </HeexContextProvider>
+        </div>
     );
 };
