@@ -12,3 +12,7 @@
 
 -   Email: heex@jekyllcloud.com
 -   [Github Discussions](https://github.com/JekyllCloud/Heex/discussions)
+
+### License
+
+-   [Apache License, Version 2.0](LICENSE)
