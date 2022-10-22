@@ -5,30 +5,18 @@ export const CommentItem = (props) => {
     const { comment, replyEditor, setReplyEditor, toggleReplyEditor } = props;
 
     const renderCommentEditor = (thread, reply, replyToId) => {
+        if (!thread) throw new Error("Thread is missing");
         if (replyEditor?.cid !== replyToId) return null;
 
-        // reply to thread only
-        if (thread && !reply) {
-            return (
-                <CommentEditor
-                    thread={thread}
-                    onSubmitSuccess={setReplyEditor}
-                />
-            );
-        }
-
-        // reply to thread's reply
-        if (thread && reply) {
-            return (
-                <CommentEditor
-                    thread={thread}
-                    reply={reply}
-                    onSubmitSuccess={setReplyEditor}
-                />
-            );
-        }
-
-        return null;
+        // if only !!thread, reply to a thread
+        // if both !!thread and !!reply, reply to a thread's reply
+        return (
+            <CommentEditor
+                thread={thread}
+                reply={reply}
+                onSubmitSuccess={setReplyEditor}
+            />
+        );
     };
 
     return (
