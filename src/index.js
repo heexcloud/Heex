@@ -4,7 +4,7 @@ import { Heex } from "./Heex";
 
 const defaultOptions = {
     rootElement: "#heex",
-    apiBaseUrl: "https://heex-api-nextjs.vercel.app",
+    apiBaseUrl: "https://api.heex.dev",
     clientName: "heex-dogfooding",
     clientId: "aGVleC1kb2dmb29kaW5n", // just some random string so that api knows which is which
 };
