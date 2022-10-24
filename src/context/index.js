@@ -6,7 +6,7 @@ const HeexContext = createContext();
 
 const initialState = { page: 1, commentCount: 0, comments: [] };
 
-export const HeexContextProvider = (props) => {
+const HeexContextProvider = (props) => {
     const { children } = props;
 
     const [state, dispatch] = useReducer(reducer, { ...initialState });
@@ -18,5 +18,6 @@ export const HeexContextProvider = (props) => {
     );
 };
 
-export const useHeexContext = () => useContext(HeexContext);
-export { ACTION };
+const useHeexContext = () => useContext(HeexContext);
+
+export { ACTION, HeexContextProvider, useHeexContext };
