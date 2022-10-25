@@ -59,6 +59,11 @@
     }
 }
 
+.heex-comment-meta {
+    display: flex;
+    align-items: center;
+}
+
 .heex-comment-list {
     display: flex;
     flex-direction: column;
@@ -155,9 +160,4 @@
             }
         }
     }
-}
-
-.heex-comment-meta {
-    display: flex;
-    align-items: center;
 }
