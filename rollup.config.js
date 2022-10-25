@@ -42,8 +42,10 @@ export default {
             extensions: [".js", ".jsx"],
             browser: true,
         }),
+        commonjs({
+            include: /node_modules/,
+        }),
         babel({ babelHelpers: "bundled", include: ["**/*.js", "**/*.jsx"] }),
-        commonjs(),
         nodePolyfills({ sourceMap: true }),
         bundleSize(),
         visualizer(),
