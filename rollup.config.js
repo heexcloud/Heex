@@ -45,9 +45,17 @@ export default {
         commonjs({
             include: /node_modules/,
         }),
-        babel({ babelHelpers: "bundled", include: ["**/*.js", "**/*.jsx"] }),
+        babel({
+            babelHelpers: "bundled",
+            include: ["**/*.js", "**/*.jsx"],
+            compact: true,
+        }),
         nodePolyfills({ sourceMap: true }),
         bundleSize(),
         visualizer(),
     ],
+    onwarn(warning, warn) {
+        if (warning.code === "THIS_IS_UNDEFINED") return;
+        warn(warning);
+    },
 };

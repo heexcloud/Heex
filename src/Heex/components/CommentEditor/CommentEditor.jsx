@@ -47,18 +47,15 @@ export const CommentEditor = (props) => {
     });
 
     return (
-        <div
-            id={`comment-editor-${editorId}`}
-            className="heex-editor-container"
-        >
+        <div id={`comment-editor-${editorId}`} className="heex-comment-editor">
             <div className="heex-editor-header">
                 <input
-                    className="heex-user-info"
+                    className="heex-commenter-info"
                     placeholder="Username"
                     name="username"
                 />
                 <input
-                    className="heex-user-info"
+                    className="heex-commenter-info"
                     placeholder="Email"
                     name="email"
                 />

@@ -1,5 +1,7 @@
 import React from "react";
 import { CommentEditor } from "../CommentEditor";
+import { format } from "../../utils";
+import { FaReply, FaThumbsUp } from "react-icons/fa";
 
 export const CommentItem = (props) => {
     const { comment, replyEditor, setReplyEditor, toggleReplyEditor } = props;
@@ -22,19 +24,29 @@ export const CommentItem = (props) => {
     return (
         <div className="heex-comment-list-item" key={comment.objectId}>
             <div className="heex-comment-thread-root">
-                <div>{comment.username}</div>
-                <div>{comment.comment}</div>
-                <div>{comment.createdAt}</div>
-                <button
-                    onClick={() =>
-                        toggleReplyEditor({
-                            cid: comment.objectId,
-                            at: comment.username,
-                        })
-                    }
-                >
-                    Reply
-                </button>
+                <div className="thread-header">
+                    <div className="thread-meta">
+                        <span>{comment.username}</span>
+                        <span>{format.formatTime(comment.createdAt)}</span>
+                    </div>
+                    <div className="thread-action">
+                        <button>
+                            <FaThumbsUp />
+                        </button>
+
+                        <button
+                            onClick={() =>
+                                toggleReplyEditor({
+                                    cid: comment.objectId,
+                                    at: comment.username,
+                                })
+                            }
+                        >
+                            <FaReply />
+                        </button>
+                    </div>
+                </div>
+                <div className="thread-body">{comment.comment}</div>
 
                 {renderCommentEditor(comment, null, comment.objectId)}
             </div>
@@ -46,19 +58,37 @@ export const CommentItem = (props) => {
                                 className="heex-comment-thread-reply-item"
                                 key={reply.objectId}
                             >
-                                <div>{reply.username}</div>
-                                <div>{reply.comment}</div>
-                                <div>{reply.createdAt}</div>
-                                <button
-                                    onClick={() =>
-                                        toggleReplyEditor({
-                                            cid: reply.objectId,
-                                            at: reply.username,
-                                        })
-                                    }
-                                >
-                                    Reply
-                                </button>
+                                <div className="reply-header">
+                                    <div className="reply-meta">
+                                        <span>{reply.username}</span>
+                                        <span>
+                                            {format.formatTime(reply.createdAt)}
+                                        </span>
+                                    </div>
+
+                                    <div className="reply-action">
+                                        <button>
+                                            <FaThumbsUp />
+                                        </button>
+
+                                        <button
+                                            onClick={() =>
+                                                toggleReplyEditor({
+                                                    cid: reply.objectId,
+                                                    at: reply.username,
+                                                })
+                                            }
+                                        >
+                                            <FaReply />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="reply-body">
+                                    <span>{`@${reply.at}: `}</span>
+                                    {reply.comment}
+                                </div>
+
                                 {renderCommentEditor(
                                     comment,
                                     reply,

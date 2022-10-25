@@ -7,9 +7,54 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="" />
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header {
+                width: 100%;
+
+                min-width: 600px;
+                width: 60%;
+                margin: 0px;
+            }
+
+            .header > ul {
+                display: flex;
+                width: 100%;
+            }
+
+            .header > ul > li {
+                width: 33.33%;
+                counter-increment: li;
+            }
+            .header > ul > li::marker {
+                content: "#" counter(li) " ";
+            }
+
+            #heex {
+                min-width: 600px;
+                width: 60%;
+                margin: 0px;
+            }
+        </style>
     </head>
     <body>
+        <header class="header">
+            <h3>Heex</h3>
+            <p>yet another commmenting system</p>
+            <ul>
+                <li>Easy to use</li>
+                <li>Self-hosted.</li>
+                <li>Higly customizable.</li>
+            </ul>
+        </header>
+
         <div id="heex"></div>
+
         <script src="../dist/heex.js"></script>
         <link rel="stylesheet" type="text/css" href="../dist/heex.css" />
         <script>
