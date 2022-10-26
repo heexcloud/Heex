@@ -47,3 +47,31 @@ export const getComments = async function () {
     }
     return [];
 };
+
+export const thumbupComment = async function (comment) {
+    const { apiBaseUrl } = window.HeexOptions;
+
+    try {
+        const response = await fetch(
+            `${apiBaseUrl}/api/v1/comment/${comment.objectId}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    operation: "thumbup",
+                    likes: (comment.likes || 1) + 1,
+                }),
+            }
+        );
+
+        const json = await response.json();
+
+        return json.data;
+    } catch (err) {
+        console.error(err);
+    }
+
+    return {};
+};

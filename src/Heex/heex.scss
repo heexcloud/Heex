@@ -6,8 +6,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 2em;
         height: 2em;
+
+        border-color: black;
+        border-style: solid;
 
         margin-left: 0.5em;
 
@@ -105,8 +107,15 @@
                 // on hover, header should have a different bg-color
 
                 .thread-meta {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
                     span {
+                        display: flex;
+                        align-items: center;
                         margin-right: 0.5em;
+                        height: 90%;
+                        box-sizing: border-box;
                     }
                 }
 
@@ -143,5 +152,19 @@
                 }
             }
         }
+    }
+}
+
+.heex-chip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 0px;
+
+    svg {
+        margin-right: 4px;
     }
 }

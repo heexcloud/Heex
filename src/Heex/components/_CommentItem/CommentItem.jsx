@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { CommentEditor } from "../CommentEditor";
 import { format } from "../../utils";
-import { FaReply, FaThumbsUp } from "react-icons/fa";
+import { FaReply, FaThumbsUp, FaHeart } from "react-icons/fa";
+import { query } from "../../utils";
+import { useHeexContext } from "../../context";
 
 export const CommentItem = (props) => {
     const { comment, replyEditor, setReplyEditor, toggleReplyEditor } = props;
+    const { state, dispatch } = useHeexContext();
 
     const renderCommentEditor = (thread, reply, replyToId) => {
         if (!thread) throw new Error("Thread is missing");
@@ -21,6 +24,16 @@ export const CommentItem = (props) => {
         );
     };
 
+    const thumbupComment = useCallback(async (comment) => {
+        const updated = await query.thumbupComment(comment);
+        if (!updated.objectId) return;
+
+        dispatch({
+            type: "THUMBUP_COMMENT",
+            payload: { updated },
+        });
+    }, []);
+
     return (
         <div className="heex-comment-list-item" key={comment.objectId}>
             <div className="heex-comment-thread-root">
@@ -28,9 +41,15 @@ export const CommentItem = (props) => {
                     <div className="thread-meta">
                         <span>{comment.username}</span>
                         <span>{format.formatTime(comment.createdAt)}</span>
+                        {comment.likes && (
+                            <span className="heex-chip">
+                                <FaHeart />
+                                {comment.likes}
+                            </span>
+                        )}
                     </div>
                     <div className="thread-action">
-                        <button>
+                        <button onClick={() => thumbupComment(comment)}>
                             <FaThumbsUp />
                         </button>
 
@@ -64,10 +83,20 @@ export const CommentItem = (props) => {
                                         <span>
                                             {format.formatTime(reply.createdAt)}
                                         </span>
+                                        {reply.likes && (
+                                            <span className="heex-chip">
+                                                <FaHeart />
+                                                {reply.likes}
+                                            </span>
+                                        )}
                                     </div>
 
                                     <div className="reply-action">
-                                        <button>
+                                        <button
+                                            onClick={() =>
+                                                thumbupComment(reply)
+                                            }
+                                        >
                                             <FaThumbsUp />
                                         </button>
 

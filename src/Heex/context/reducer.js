@@ -17,6 +17,15 @@ export const reducer = (state, action) => {
                 ...state,
                 commentCount: payload.commentCount,
             };
+        case ACTION.THUMBUP_COMMENT:
+            const toBeUpdatedIndex = state.comments.findIndex(
+                (c) => c.objectId === payload.updated.objectId
+            );
+            if (toBeUpdatedIndex === -1) return state;
+            const toBeUpdated = state.comments[toBeUpdatedIndex];
+            toBeUpdated.likes = payload.updated.likes;
+            state.comments[toBeUpdatedIndex] = toBeUpdated;
+            return { ...state }; // the destructor is a must
         default:
             return state;
     }
