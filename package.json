@@ -12,6 +12,7 @@
         "rollup.config.js"
     ],
     "scripts": {
+        "prebuild": "rm -rf dist",
         "build": "rollup --config",
         "watch": "rollup --config --watch",
         "serve": "serve .",
