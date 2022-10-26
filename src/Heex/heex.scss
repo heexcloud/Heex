@@ -154,3 +154,17 @@
         }
     }
 }
+
+.heex-chip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 0px;
+
+    svg {
+        margin-right: 4px;
+    }
+}
