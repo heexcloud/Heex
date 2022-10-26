@@ -19,27 +19,28 @@
     }
 }
 
-.heex-container {
+@mixin flex($direction) {
     display: flex;
-    flex-direction: column;
+    flex-direction: $direction;
+}
+
+.heex-container {
+    @include flex(column);
     width: 100%;
 }
 
 .heex-comment-editor {
     width: 100%;
 
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
 
     .heex-editor-header {
         width: 100%;
 
-        display: flex;
-        flex-direction: row;
+        @include flex(row);
 
         @media screen and (max-width: 600px) {
-            display: flex;
-            flex-direction: column;
+            @include flex(column);
         }
 
         .heex-commenter-info {
@@ -86,17 +87,14 @@
 }
 
 .heex-comment-list {
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
 
     .heex-comment-list-item {
-        display: flex;
-        flex-direction: column;
+        @include flex(column);
         width: 100%;
 
         .heex-comment-thread-root {
-            display: flex;
-            flex-direction: column;
+            @include flex(column);
 
             .thread-header {
                 display: flex;
@@ -123,8 +121,7 @@
             align-self: end;
 
             .heex-comment-thread-reply-item {
-                display: flex;
-                flex-direction: column;
+                @include flex(column);
 
                 width: 100%;
 
