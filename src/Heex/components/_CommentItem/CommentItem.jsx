@@ -42,7 +42,7 @@ export const CommentItem = (props) => {
                         <span>{comment.username}</span>
                         <span>{format.formatTime(comment.createdAt)}</span>
                         {comment.likes && (
-                            <span className="heex-chip">
+                            <span>
                                 <FaHeart />
                                 {comment.likes}
                             </span>
@@ -84,7 +84,7 @@ export const CommentItem = (props) => {
                                             {format.formatTime(reply.createdAt)}
                                         </span>
                                         {reply.likes && (
-                                            <span className="heex-chip">
+                                            <span>
                                                 <FaHeart />
                                                 {reply.likes}
                                             </span>
