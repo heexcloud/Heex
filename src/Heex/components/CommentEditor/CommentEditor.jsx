@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { query } from "../../utils";
 import { useHeexContext, ACTION } from "../../context";
 import { useMemoizedFn } from "../../hooks";
+import { FaPaperPlane, FaSpinner } from "react-icons/fa";
 
 export const CommentEditor = (props) => {
     const { dispatch } = useHeexContext();
     const { thread, reply, onSubmitSuccess, onSubmitFailure } = props;
+
+    const [loading, setLoading] = useState(false);
+
     const editorId = reply?.objectId || thread?.objectId || "Heex";
 
     const handleCreateComment = useMemoizedFn(async () => {
+        setLoading(true);
         const usernameSelector = `#comment-editor-${editorId} input[name='username']`;
         const emailSelector = `#comment-editor-${editorId} input[name='email']`;
         const commentContentSelector = `#comment-editor-${editorId} textarea[name='commentContent']`;
@@ -43,6 +48,7 @@ export const CommentEditor = (props) => {
         document.querySelector(usernameSelector).value = "";
         document.querySelector(emailSelector).value = "";
         document.querySelector(commentContentSelector).value = "";
+        setLoading(false);
         onSubmitSuccess && onSubmitSuccess();
     });
 
@@ -68,7 +74,11 @@ export const CommentEditor = (props) => {
                     onClick={handleCreateComment}
                     className="heex-editor-submit-button"
                 >
-                    Submit
+                    {loading ? (
+                        <FaSpinner className="spinner" />
+                    ) : (
+                        <FaPaperPlane />
+                    )}
                 </button>
             </div>
         </div>
