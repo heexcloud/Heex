@@ -16,10 +16,6 @@ export default class Singleton {
         // allow user just overwrites a part of the default options
         const _opts = opts ? { ...defaultOptions, ...opts } : defaultOptions;
 
-        if (typeof window !== "undefined") {
-            window.HeexOptions = _opts;
-        }
-
         if (!Singleton._instance) {
             Singleton._instance = new Singleton(_opts);
         }
@@ -39,6 +35,6 @@ export default class Singleton {
     _render() {
         this._rootElement = document.querySelector(this._options.rootElement);
         this._root = ReactDOMClient.createRoot(this._rootElement);
-        this._root.render(<Heex />);
+        this._root.render(<Heex options={this._options} />);
     }
 }
