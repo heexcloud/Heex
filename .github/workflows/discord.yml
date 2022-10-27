@@ -1,12 +1,15 @@
 name: Discord Heex Server
 
-on: pull_request
-    issues
-    issue_comment
-    discussion
-    discussion_comment
-    deployment
-    deployment_status
+on:
+    [
+        pull_request,
+        issues,
+        issue_comment,
+        discussion,
+        discussion_comment,
+        deployment,
+        deployment_status,
+    ]
 
 env:
     NODE_ENV: production
