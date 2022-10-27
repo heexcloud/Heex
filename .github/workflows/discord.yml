@@ -3,7 +3,6 @@ name: Discord Heex Server
 on:
     [
         pull_request,
-        pull_request_comment,
         pull_request_review,
         pull_request_review_comment,
         pull_request_target,
