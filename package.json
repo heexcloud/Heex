@@ -5,16 +5,21 @@
     "license": "Apache-2.0",
     "type": "module",
     "files": [
+        "dist",
         "package.json",
         "yarn.lock",
-        "dist",
         "README.md",
         "rollup.config.js"
     ],
     "scripts": {
         "prebuild": "rm -rf dist",
-        "build": "rollup --config",
-        "watch": "rollup --config --watch",
+        "build-js": "rollup --config",
+        "build-css": "sass ./src/Heex/heex.scss ./dist/heex.css --no-source-map",
+        "build-css-min": "sass ./src/Heex/heex.scss ./dist/heex.min.css --style compressed --no-source-map",
+        "build": "concurrently \"yarn:build-js\" \"yarn:build-css\" \"yarn:build-css-min\"",
+        "watch-js": "rollup --config --watch",
+        "watch-css": "sass --watch ./src/Heex/heex.scss ./dist/heex.css --no-source-map",
+        "watch": "concurrently \"yarn:watch-js\" \"yarn:watch-css\"",
         "serve": "serve .",
         "release": "release-it"
     },
@@ -32,11 +37,11 @@
         "@rollup/plugin-json": "^5.0.0",
         "@rollup/plugin-node-resolve": "^15.0.0",
         "@rollup/plugin-replace": "^5.0.0",
+        "concurrently": "^7.5.0",
         "release-it": "^15.5.0",
         "rollup": "^3.0.0",
         "rollup-plugin-bundle-size": "^1.0.3",
         "rollup-plugin-polyfill-node": "^0.10.2",
-        "rollup-plugin-scss": "3",
         "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-visualizer": "^5.8.2",
         "sass": "^1.55.0"
