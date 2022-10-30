@@ -61,7 +61,7 @@ export const thumbupComment = async function (comment) {
                 },
                 body: JSON.stringify({
                     operation: "thumbup",
-                    likes: (comment.likes || 1) + 1,
+                    likes: (comment.likes || 0) + 1,
                 }),
             }
         );
