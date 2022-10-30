@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { query } from "../../utils";
-import { useHeexContext, ACTION } from "../../context";
 import { useMemoizedFn } from "../../hooks";
 import { FaPaperPlane, FaSpinner } from "react-icons/fa";
 
 export const CommentEditor = (props) => {
-    const { dispatch } = useHeexContext();
     const { thread, reply, onSubmitSuccess, onSubmitFailure } = props;
 
     const [loading, setLoading] = useState(false);
@@ -39,11 +37,6 @@ export const CommentEditor = (props) => {
             onSubmitFailure && onSubmitFailure();
             return;
         }
-
-        dispatch({
-            type: ACTION.SET_COMMENT_COUNT,
-            payload: { commentCount: result.count },
-        });
 
         document.querySelector(usernameSelector).value = "";
         document.querySelector(emailSelector).value = "";
