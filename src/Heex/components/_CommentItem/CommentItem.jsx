@@ -3,7 +3,7 @@ import { CommentEditor } from "../CommentEditor";
 import { format } from "../../utils";
 import { FaReply, FaThumbsUp, FaHeart } from "react-icons/fa";
 import { query } from "../../utils";
-import { useHeexContext } from "../../context";
+import { useHeexContext, ACTION } from "../../context";
 
 export const CommentItem = (props) => {
     const { comment, replyEditor, setReplyEditor, toggleReplyEditor } = props;
@@ -21,7 +21,9 @@ export const CommentItem = (props) => {
                 reply={reply}
                 onSubmitSuccess={() => {
                     setReplyEditor();
-                    thread && reply ? afterCreateReply() : afterCreateThread();
+                    thread && reply
+                        ? onCreateReplySuccess()
+                        : onCreateThreadSuccess();
                 }}
             />
         );
@@ -29,20 +31,23 @@ export const CommentItem = (props) => {
 
     // fetch all threads, do not forget page!
     // if there are more than 1 page loaded, fetch comments of all loaded pages
-    const afterCreateThread = () => {};
+    const onCreateThreadSuccess = () => {};
 
     // fetch the thread and its replies
     // update the signle thread
-    const afterCreateReply = () => {};
+    const onCreateReplySuccess = () => {};
 
     const thumbupComment = useCallback(async (comment) => {
         const updated = await query.thumbupComment(comment);
-        if (!updated.objectId) return;
-
-        dispatch({
-            type: "THUMBUP_COMMENT",
-            payload: { updated },
-        });
+        const toBeUpdatedIndex = state.comments.findIndex(
+            (c) => c.objectId === updated.objectId
+        );
+        if (toBeUpdatedIndex !== -1) {
+            dispatch({
+                type: ACTION.THUMBUP_COMMENT,
+                payload: { likes: updated.likes, toBeUpdatedIndex },
+            });
+        }
     }, []);
 
     return (
