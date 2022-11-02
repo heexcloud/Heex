@@ -33,19 +33,25 @@ export const getCommentCount = async function () {
     return 0;
 };
 
-export const getComments = async function () {
-    const { apiBaseUrl, clientId } = window.HeexOptions;
+export const getComments = async function (param) {
     try {
         const pageId = window.location.pathname;
-        const response = await fetch(
-            `${apiBaseUrl}/api/v1/comments?pageId=${pageId}&clientId=${clientId}`
-        );
+        const { apiBaseUrl, clientId } = window.HeexOptions;
+        const { limit } = param || {};
+        const params = new URLSearchParams({
+            pageId,
+            clientId,
+        });
+        if (limit !== undefined) {
+            params.append("limit", limit);
+        }
+
+        const response = await fetch(`${apiBaseUrl}/api/v1/comments?${params}`);
         const json = await response.json();
         return json.data.comments;
     } catch (err) {
         console.error(err);
     }
-    return [];
 };
 
 export const thumbupComment = async function (comment) {

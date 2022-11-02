@@ -15,6 +15,7 @@ export default {
             file: "dist/heex.js",
             format: "umd",
             name: "Heex",
+            sourcemap: true,
         },
         {
             file: "dist/heex.min.js",

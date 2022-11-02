@@ -7,6 +7,8 @@ export const reducer = (state, action) => {
             return { ...state, page: payload.page };
         case ACTION.PAGE_INCR:
             return { ...state, page: state.page + 1 };
+        case ACTION.SET_COMMENTS:
+            return { ...state, comments: payload.comments };
         case ACTION.APPEND_COMMENTS:
             return {
                 ...state,
