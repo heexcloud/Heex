@@ -7,6 +7,8 @@ export const reducer = (state, action) => {
             return { ...state, page: payload.page };
         case ACTION.PAGE_INCR:
             return { ...state, page: state.page + 1 };
+        case ACTION.SET_COMMENTS:
+            return { ...state, comments: payload.comments };
         case ACTION.APPEND_COMMENTS:
             return {
                 ...state,
@@ -18,12 +20,9 @@ export const reducer = (state, action) => {
                 commentCount: payload.commentCount,
             };
         case ACTION.THUMBUP_COMMENT:
-            const toBeUpdatedIndex = state.comments.findIndex(
-                (c) => c.objectId === payload.updated.objectId
-            );
-            if (toBeUpdatedIndex === -1) return state;
+            const toBeUpdatedIndex = payload.toBeUpdatedIndex;
             const toBeUpdated = state.comments[toBeUpdatedIndex];
-            toBeUpdated.likes = payload.updated.likes;
+            toBeUpdated.likes = payload.likes;
             state.comments[toBeUpdatedIndex] = toBeUpdated;
             return { ...state }; // the destructor is a must
         default:

@@ -22,6 +22,7 @@ export const CommentList = () => {
         Promise.all([query.getCommentCount(), query.getComments()]).then(
             (res) => {
                 const [count, comments] = res;
+
                 dispatch({
                     type: ACTION.SET_COMMENT_COUNT,
                     payload: {
@@ -31,7 +32,7 @@ export const CommentList = () => {
                 dispatch({
                     type: ACTION.APPEND_COMMENTS,
                     payload: {
-                        comments,
+                        comments: comments || [],
                     },
                 });
             }

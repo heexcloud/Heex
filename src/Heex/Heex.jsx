@@ -10,7 +10,7 @@ export const Heex = ({ options }) => {
     return (
         <div className="heex-container">
             <HeexContextProvider>
-                <CommentEditor />
+                <CommentEditor isTopLevel />
                 <CommentMeta />
                 <CommentList />
             </HeexContextProvider>
