@@ -19,23 +19,10 @@ export const CommentItem = (props) => {
             <CommentEditor
                 thread={thread}
                 reply={reply}
-                onSubmitSuccess={() => {
-                    setReplyEditor();
-                    thread && reply
-                        ? onCreateReplySuccess()
-                        : onCreateThreadSuccess();
-                }}
+                onSubmitSuccess={setReplyEditor}
             />
         );
     };
-
-    // fetch all threads, do not forget page!
-    // if there are more than 1 page loaded, fetch comments of all loaded pages
-    const onCreateThreadSuccess = () => {};
-
-    // fetch the thread and its replies
-    // update the signle thread
-    const onCreateReplySuccess = () => {};
 
     const thumbupComment = useCallback(async (comment) => {
         const updated = await query.thumbupComment(comment);

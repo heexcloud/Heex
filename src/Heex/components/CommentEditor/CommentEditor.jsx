@@ -9,7 +9,7 @@ export const CommentEditor = (props) => {
         props;
 
     const [loading, setLoading] = useState(false);
-    const { refreshCommentsWithLimit } = useHeexContext();
+    const { refreshCommentsWithLimit, refreshThread } = useHeexContext();
 
     const editorId = reply?.objectId || thread?.objectId || "Heex";
 
@@ -25,7 +25,10 @@ export const CommentEditor = (props) => {
             .querySelector(commentContentSelector)
             .value.trim();
 
-        if (!username || !email || !commentContent) return;
+        if (!username || !email || !commentContent) {
+            setLoading(false);
+            return;
+        }
 
         const result = await query.createComment({
             username,
@@ -45,11 +48,17 @@ export const CommentEditor = (props) => {
         // document.querySelector(emailSelector).value = "";
         document.querySelector(commentContentSelector).value = "";
         setLoading(false);
+        // top level comment
         if (isTopLevel) {
             await refreshCommentsWithLimit();
-        } else {
-            onSubmitSuccess && onSubmitSuccess();
         }
+
+        // reply to a thread, or to a thread's reply
+        if (!isTopLevel && thread) {
+            await refreshThread({ cid: thread.objectId });
+        }
+
+        onSubmitSuccess && onSubmitSuccess();
     });
 
     return (

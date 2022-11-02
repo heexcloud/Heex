@@ -47,6 +47,7 @@ export const CommentList = () => {
                         key={comment.objectId}
                         comment={comment}
                         replyEditor={replyEditor}
+                        setReplyEditor={setReplyEditor}
                         toggleReplyEditor={toggleReplyEditor}
                     />
                 );

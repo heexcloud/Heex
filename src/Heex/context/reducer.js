@@ -19,6 +19,15 @@ export const reducer = (state, action) => {
                 ...state,
                 commentCount: payload.commentCount,
             };
+        case ACTION.INCR_COMMENT_COUNT:
+            return {
+                ...state,
+                commentCount: state.commentCount + 1,
+            };
+        case ACTION.REFRESH_THREAD:
+            const toBeRefreshedIndex = payload.toBeRefreshedIndex;
+            state.comments[toBeRefreshedIndex] = payload.toBeRefreshed;
+            return { ...state };
         case ACTION.THUMBUP_COMMENT:
             const toBeUpdatedIndex = payload.toBeUpdatedIndex;
             const toBeUpdated = state.comments[toBeUpdatedIndex];

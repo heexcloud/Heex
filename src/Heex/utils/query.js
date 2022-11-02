@@ -81,3 +81,14 @@ export const thumbupComment = async function (comment) {
 
     return {};
 };
+
+export const getCommentById = async function (cid) {
+    const { apiBaseUrl } = window.HeexOptions;
+    try {
+        const response = await fetch(`${apiBaseUrl}/api/v1/comment/${cid}`);
+        const json = await response.json();
+        return json.data; // comment and its replies
+    } catch (err) {
+        console.error("err :>> ", err);
+    }
+};
