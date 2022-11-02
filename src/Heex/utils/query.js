@@ -18,12 +18,12 @@ export const createComment = async function (payload) {
 };
 
 export const getCommentCount = async function () {
-    const { apiBaseUrl } = window.HeexOptions;
+    const { clientId, apiBaseUrl } = window.HeexOptions;
 
     try {
         const pageId = window.location.pathname;
         const response = await fetch(
-            `${apiBaseUrl}/api/v1/comment/count?pageId=${pageId}`
+            `${apiBaseUrl}/api/v1/comment/count?pageId=${pageId}&clientId=${clientId}`
         );
         const json = await response.json();
         return json.data.count;
@@ -34,11 +34,11 @@ export const getCommentCount = async function () {
 };
 
 export const getComments = async function () {
-    const { apiBaseUrl } = window.HeexOptions;
+    const { apiBaseUrl, clientId } = window.HeexOptions;
     try {
         const pageId = window.location.pathname;
         const response = await fetch(
-            `${apiBaseUrl}/api/v1/comments?pageId=${pageId}`
+            `${apiBaseUrl}/api/v1/comments?pageId=${pageId}&clientId=${clientId}`
         );
         const json = await response.json();
         return json.data.comments;
