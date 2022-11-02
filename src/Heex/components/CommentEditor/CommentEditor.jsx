@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { query } from "../../utils";
-import { useHeexContext, ACTION } from "../../context";
 import { useMemoizedFn } from "../../hooks";
+import { FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { useHeexContext } from "../../context";
 
 export const CommentEditor = (props) => {
-    const { dispatch } = useHeexContext();
-    const { thread, reply, onSubmitSuccess, onSubmitFailure } = props;
+    const { thread, reply, onSubmitSuccess, onSubmitFailure, isTopLevel } =
+        props;
+
+    const [loading, setLoading] = useState(false);
+    const { refreshCommentsWithLimit } = useHeexContext();
+
     const editorId = reply?.objectId || thread?.objectId || "Heex";
 
     const handleCreateComment = useMemoizedFn(async () => {
+        setLoading(true);
         const usernameSelector = `#comment-editor-${editorId} input[name='username']`;
         const emailSelector = `#comment-editor-${editorId} input[name='email']`;
         const commentContentSelector = `#comment-editor-${editorId} textarea[name='commentContent']`;
@@ -35,15 +41,15 @@ export const CommentEditor = (props) => {
             return;
         }
 
-        dispatch({
-            type: ACTION.SET_COMMENT_COUNT,
-            payload: { commentCount: result.count },
-        });
-
-        document.querySelector(usernameSelector).value = "";
-        document.querySelector(emailSelector).value = "";
+        // document.querySelector(usernameSelector).value = "";
+        // document.querySelector(emailSelector).value = "";
         document.querySelector(commentContentSelector).value = "";
-        onSubmitSuccess && onSubmitSuccess();
+        setLoading(false);
+        if (isTopLevel) {
+            await refreshCommentsWithLimit();
+        } else {
+            onSubmitSuccess && onSubmitSuccess();
+        }
     });
 
     return (
@@ -68,7 +74,11 @@ export const CommentEditor = (props) => {
                     onClick={handleCreateComment}
                     className="heex-editor-submit-button"
                 >
-                    Submit
+                    {loading ? (
+                        <FaSpinner className="spinner" />
+                    ) : (
+                        <FaPaperPlane />
+                    )}
                 </button>
             </div>
         </div>

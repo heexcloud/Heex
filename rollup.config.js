@@ -4,7 +4,6 @@ import { babel } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import nodePolyfills from "rollup-plugin-polyfill-node";
-import scss from "rollup-plugin-scss";
 import bundleSize from "rollup-plugin-bundle-size";
 import { visualizer } from "rollup-plugin-visualizer";
 import replace from "@rollup/plugin-replace";
@@ -16,6 +15,7 @@ export default {
             file: "dist/heex.js",
             format: "umd",
             name: "Heex",
+            sourcemap: true,
         },
         {
             file: "dist/heex.min.js",
@@ -31,9 +31,6 @@ export default {
                 "process.env.NODE_ENV": '"production"',
             },
             preventAssignment: true,
-        }),
-        scss({
-            outputStyle: "compressed",
         }),
         nodeResolve({
             extensions: [".js", ".jsx"],

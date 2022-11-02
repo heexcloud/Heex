@@ -18,12 +18,12 @@ export const createComment = async function (payload) {
 };
 
 export const getCommentCount = async function () {
-    const { apiBaseUrl } = window.HeexOptions;
+    const { clientId, apiBaseUrl } = window.HeexOptions;
 
     try {
         const pageId = window.location.pathname;
         const response = await fetch(
-            `${apiBaseUrl}/api/v1/comment/count?pageId=${pageId}`
+            `${apiBaseUrl}/api/v1/comment/count?pageId=${pageId}&clientId=${clientId}`
         );
         const json = await response.json();
         return json.data.count;
@@ -33,19 +33,25 @@ export const getCommentCount = async function () {
     return 0;
 };
 
-export const getComments = async function () {
-    const { apiBaseUrl } = window.HeexOptions;
+export const getComments = async function (param) {
     try {
         const pageId = window.location.pathname;
-        const response = await fetch(
-            `${apiBaseUrl}/api/v1/comments?pageId=${pageId}`
-        );
+        const { apiBaseUrl, clientId } = window.HeexOptions;
+        const { limit } = param || {};
+        const params = new URLSearchParams({
+            pageId,
+            clientId,
+        });
+        if (limit !== undefined) {
+            params.append("limit", limit);
+        }
+
+        const response = await fetch(`${apiBaseUrl}/api/v1/comments?${params}`);
         const json = await response.json();
         return json.data.comments;
     } catch (err) {
         console.error(err);
     }
-    return [];
 };
 
 export const thumbupComment = async function (comment) {
@@ -61,7 +67,7 @@ export const thumbupComment = async function (comment) {
                 },
                 body: JSON.stringify({
                     operation: "thumbup",
-                    likes: (comment.likes || 1) + 1,
+                    likes: (comment.likes || 0) + 1,
                 }),
             }
         );

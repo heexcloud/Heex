@@ -26,6 +26,12 @@
     flex-direction: $direction;
 }
 
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .heex-container {
     @include flex(column);
     width: 100%;
@@ -75,10 +81,9 @@
         width: 100%;
 
         .heex-editor-submit-button {
-            width: 4rem;
-            display: inline-block;
-            vertical-align: middle;
-            min-width: 2.5em;
+            width: 2em;
+            height: 2em;
+            @include flex-center;
         }
     }
 }
@@ -152,5 +157,32 @@
                 }
             }
         }
+    }
+}
+
+.heex-chip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 0px;
+
+    svg {
+        margin-right: 4px;
+    }
+}
+
+.spinner {
+    animation: spin infinite 1s linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
