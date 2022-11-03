@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { query } from "../../utils";
 import { useMemoizedFn } from "../../hooks";
 import { FaPaperPlane, FaSpinner } from "react-icons/fa";
 import { useHeexContext } from "../../context";
+import { useDebouncedCallback } from "use-debounce";
 
 export const CommentEditor = (props) => {
     const { thread, reply, onSubmitSuccess, onSubmitFailure, isTopLevel } =
         props;
 
     const [loading, setLoading] = useState(false);
+    const submitButtonRef = useRef();
     const { refreshCommentsWithLimit, refreshThread } = useHeexContext();
 
     const editorId = reply?.objectId || thread?.objectId || "Heex";
 
     const handleCreateComment = useMemoizedFn(async () => {
         setLoading(true);
+        submitButtonRef.current.disabled = true;
         const usernameSelector = `#comment-editor-${editorId} input[name='username']`;
         const emailSelector = `#comment-editor-${editorId} input[name='email']`;
         const commentContentSelector = `#comment-editor-${editorId} textarea[name='commentContent']`;
@@ -27,6 +30,7 @@ export const CommentEditor = (props) => {
 
         if (!username || !email || !commentContent) {
             setLoading(false);
+            submitButtonRef.current.disabled = false;
             return;
         }
 
@@ -41,6 +45,8 @@ export const CommentEditor = (props) => {
         });
         if (result === undefined) {
             onSubmitFailure && onSubmitFailure();
+            setLoading(false);
+            submitButtonRef.current.disabled = false;
             return;
         }
 
@@ -59,7 +65,14 @@ export const CommentEditor = (props) => {
         }
 
         onSubmitSuccess && onSubmitSuccess();
+        setLoading(false);
+        submitButtonRef.current.disabled = false;
     });
+
+    const debouncedHandleCreateComment = useDebouncedCallback(
+        handleCreateComment,
+        1000
+    );
 
     return (
         <div id={`comment-editor-${editorId}`} className="heex-comment-editor">
@@ -80,7 +93,8 @@ export const CommentEditor = (props) => {
             </div>
             <div className="heex-editor-footer">
                 <button
-                    onClick={handleCreateComment}
+                    ref={submitButtonRef}
+                    onClick={debouncedHandleCreateComment}
                     className="heex-editor-submit-button"
                 >
                     {loading ? (
