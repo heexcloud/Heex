@@ -16,7 +16,7 @@ const HeexContextProvider = (props) => {
 
     const refreshCommentsWithLimit = useMemoizedFn(async () => {
         // limit is the current number of comments, no need to fetch all
-        const comments = await getComments({ limit: state.comments.length });
+        const comments = await getComments({ limit: 25 });
         if (comments !== undefined) {
             dispatch({
                 type: ACTION.SET_COMMENTS,
