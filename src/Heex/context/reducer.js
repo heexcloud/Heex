@@ -35,10 +35,7 @@ export const reducer = (state, action) => {
             return { ...state }; // the destructor is a must
         case ACTION.THUMBUP_THREAD_REPLY:
             const thread = state.comments[payload.threadIndex];
-            const toBeUpdatedReplyIndex = thread.replies.findIndex(
-                (r) => r.objectId === payload.replyId
-            );
-            thread.replies[toBeUpdatedReplyIndex].likes = payload.likes;
+            thread.replies[payload.replyIndex].likes = payload.likes;
             state.comments[payload.threadIndex] = thread;
             return { ...state }; // the destructor is a must
         default:

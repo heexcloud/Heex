@@ -40,14 +40,16 @@ export const CommentItem = (props) => {
                 (c) => c.objectId === updated.tid
             );
 
-            const replyId = updated.objectId;
+            const replyIndex = state.comments[_threadIndex].replies.findIndex(
+                (r) => r.objectId === updated.objectId
+            );
 
             dispatch({
                 type: ACTION.THUMBUP_THREAD_REPLY,
                 payload: {
                     likes: updated.likes,
                     threadIndex: _threadIndex,
-                    replyId,
+                    replyIndex,
                 },
             });
         }
