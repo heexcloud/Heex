@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { CommentEditor } from "../CommentEditor";
-import { format } from "../../utils";
+import { format, query } from "../../utils";
 import { FaReply, FaThumbsUp, FaHeart } from "react-icons/fa";
-import { query } from "../../utils";
 import { useHeexContext, ACTION } from "../../context";
+import { useMemoizedFn } from "../../hooks";
+import { useDebouncedCallback } from "use-debounce";
 
 export const CommentItem = (props) => {
     const { comment, replyEditor, setReplyEditor, toggleReplyEditor } = props;
@@ -24,7 +25,7 @@ export const CommentItem = (props) => {
         );
     };
 
-    const thumbupComment = useCallback(async (comment) => {
+    const thumbupComment = useMemoizedFn(async (comment) => {
         const updated = await query.thumbupComment(comment);
         const threadIndex = state.comments.findIndex(
             (c) => c.objectId === updated.objectId
@@ -53,7 +54,9 @@ export const CommentItem = (props) => {
                 },
             });
         }
-    }, []);
+    });
+
+    const debouncedThumbupComment = useDebouncedCallback(thumbupComment, 1000);
 
     return (
         <div className="heex-comment-list-item" key={comment.objectId}>
@@ -70,7 +73,9 @@ export const CommentItem = (props) => {
                         )}
                     </div>
                     <div className="thread-action">
-                        <button onClick={() => thumbupComment(comment)}>
+                        <button
+                            onClick={() => debouncedThumbupComment(comment)}
+                        >
                             <FaThumbsUp />
                         </button>
 
@@ -115,7 +120,7 @@ export const CommentItem = (props) => {
                                     <div className="reply-action">
                                         <button
                                             onClick={() =>
-                                                thumbupComment(reply)
+                                                debouncedThumbupComment(reply)
                                             }
                                         >
                                             <FaThumbsUp />
