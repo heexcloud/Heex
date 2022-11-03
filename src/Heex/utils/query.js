@@ -42,7 +42,9 @@ export const getComments = async function (param) {
             pageId,
             clientId,
         });
-        if (limit !== undefined) {
+
+        // limit could be 0 when there is no comment at all
+        if (limit !== undefined && limit > 0) {
             params.append("limit", limit);
         }
 
