@@ -26,13 +26,29 @@ export const CommentItem = (props) => {
 
     const thumbupComment = useCallback(async (comment) => {
         const updated = await query.thumbupComment(comment);
-        const toBeUpdatedIndex = state.comments.findIndex(
+        const threadIndex = state.comments.findIndex(
             (c) => c.objectId === updated.objectId
         );
-        if (toBeUpdatedIndex !== -1) {
+
+        if (threadIndex !== -1) {
             dispatch({
-                type: ACTION.THUMBUP_COMMENT,
-                payload: { likes: updated.likes, toBeUpdatedIndex },
+                type: ACTION.THUMBUP_THREAD,
+                payload: { likes: updated.likes, threadIndex },
+            });
+        } else {
+            const _threadIndex = state.comments.findIndex(
+                (c) => c.objectId === updated.tid
+            );
+
+            const replyId = updated.objectId;
+
+            dispatch({
+                type: ACTION.THUMBUP_THREAD_REPLY,
+                payload: {
+                    likes: updated.likes,
+                    threadIndex: _threadIndex,
+                    replyId,
+                },
             });
         }
     }, []);

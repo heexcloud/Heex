@@ -28,11 +28,18 @@ export const reducer = (state, action) => {
             const toBeRefreshedIndex = payload.toBeRefreshedIndex;
             state.comments[toBeRefreshedIndex] = payload.toBeRefreshed;
             return { ...state };
-        case ACTION.THUMBUP_COMMENT:
-            const toBeUpdatedIndex = payload.toBeUpdatedIndex;
-            const toBeUpdated = state.comments[toBeUpdatedIndex];
-            toBeUpdated.likes = payload.likes;
-            state.comments[toBeUpdatedIndex] = toBeUpdated;
+        case ACTION.THUMBUP_THREAD:
+            const toBeUpdatedThread = state.comments[payload.threadIndex];
+            toBeUpdatedThread.likes = payload.likes;
+            state.comments[payload.threadIndex] = toBeUpdatedThread;
+            return { ...state }; // the destructor is a must
+        case ACTION.THUMBUP_THREAD_REPLY:
+            const thread = state.comments[payload.threadIndex];
+            const toBeUpdatedReplyIndex = thread.replies.findIndex(
+                (r) => r.objectId === payload.replyId
+            );
+            thread.replies[toBeUpdatedReplyIndex].likes = payload.likes;
+            state.comments[payload.threadIndex] = thread;
             return { ...state }; // the destructor is a must
         default:
             return state;
