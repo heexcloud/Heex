@@ -5,7 +5,7 @@ export const HeexLogo = () => {
     return (
         <div className="heex-logo">
             <span className="heex-logo-icon">
-                <FcFlashOn size={"1rem"} />
+                <FcFlashOn size={"1.5rem"} />
             </span>
             <span className="heex-logo-text">
                 Powered By{" "}
