@@ -8,7 +8,7 @@ export const HeexLogo = () => {
                 <FcFlashOn size={"1.5rem"} />
             </span>
             <span className="heex-logo-text">
-                Powered By{" "}
+                Powered by{" "}
                 <a
                     href="https://heex.dev"
                     target="_blank"
