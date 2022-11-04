@@ -6,8 +6,13 @@ export const CommentMeta = () => {
 
     return (
         <div className="heex-comment-meta">
-            <span className="heex-comment-meta-label">Comment count: </span>
-            <span className="heex-comment-count">{state.commentCount}</span>
+            <div className="heex-comment-meta-item heex-comment-count">{`${
+                state.commentCount
+            } Comment${state.commentCount > 1 ? "s" : ""}`}</div>
+            <div className="heex-comment-meta-item heex-comment-sort">
+                <button className="active">Newest</button>
+                <button>Hottest</button>
+            </div>
         </div>
     );
 };

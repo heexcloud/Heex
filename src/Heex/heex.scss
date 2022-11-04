@@ -35,6 +35,7 @@
 .heex-container {
     @include flex(column);
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .heex-comment-editor {
@@ -138,7 +139,6 @@
                     }
 
                     .heex-logo-text {
-                        font-family: "Arial";
                         font-style: normal;
                         font-weight: 400;
 
@@ -158,7 +158,7 @@
                     height: 2rem;
                     width: 6.75rem;
                     color: #fff;
-                    font-family: "Arial";
+
                     font-style: normal;
                     font-weight: 400;
                     font-size: 0.875rem;
@@ -175,6 +175,42 @@
 .heex-comment-meta {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    height: 2.625rem;
+    margin-top: 1.75rem;
+
+    .heex-comment-meta-item {
+        display: flex;
+        align-items: center;
+
+        height: 100%;
+        width: fit-content;
+    }
+
+    .heex-comment-sort {
+        background-color: #f2f3f5;
+        button {
+            height: 2.125rem;
+            width: 5.625rem;
+            margin: 0.25rem;
+
+            background-color: #f2f3f5;
+
+            border: none;
+            outline: none;
+
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.25rem;
+        }
+
+        button.active {
+            background-color: #fff;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+            color: #074dda;
+        }
+    }
 }
 
 .heex-comment-list {
