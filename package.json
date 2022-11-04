@@ -14,11 +14,11 @@
     "scripts": {
         "prebuild": "rm -rf dist",
         "build-js": "rollup --config",
-        "build-css": "sass ./src/Heex/heex.scss ./dist/heex.css --no-source-map",
+        "build-css": "sass ./src/Heex/heex.scss ./dist/heex.css --no-source-map --error-css --color",
         "build-css-min": "sass ./src/Heex/heex.scss ./dist/heex.min.css --style compressed --no-source-map",
         "build": "concurrently \"yarn:build-js\" \"yarn:build-css\" \"yarn:build-css-min\"",
         "watch-js": "rollup --config --watch",
-        "watch-css": "sass --watch ./src/Heex/heex.scss ./dist/heex.css --no-source-map",
+        "watch-css": "sass --watch ./src/Heex/heex.scss ./dist/heex.css --no-source-map --error-css --color",
         "watch": "concurrently \"yarn:watch-js\" \"yarn:watch-css\"",
         "serve": "serve .",
         "release": "release-it"

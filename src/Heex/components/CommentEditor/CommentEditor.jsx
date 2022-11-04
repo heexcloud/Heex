@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { query } from "../../utils";
 import { useMemoizedFn } from "../../hooks";
-import { FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { FaPaperPlane, FaSpinner, FaImage, FaLaugh } from "react-icons/fa";
 import { useHeexContext } from "../../context";
 import { useDebouncedCallback } from "use-debounce";
+import { Avatar, HeexLogo } from "../_Simple";
 
 export const CommentEditor = (props) => {
     const { thread, reply, onSubmitSuccess, onSubmitFailure, isTopLevel } =
@@ -76,33 +77,49 @@ export const CommentEditor = (props) => {
 
     return (
         <div id={`comment-editor-${editorId}`} className="heex-comment-editor">
-            <div className="heex-editor-header">
-                <input
-                    className="heex-commenter-info"
-                    placeholder="Username"
-                    name="username"
-                />
-                <input
-                    className="heex-commenter-info"
-                    placeholder="Email"
-                    name="email"
-                />
+            <div className="left">
+                <Avatar />
             </div>
-            <div className="heex-editor-body">
-                <textarea required name="commentContent" />
-            </div>
-            <div className="heex-editor-footer">
-                <button
-                    ref={submitButtonRef}
-                    onClick={debouncedHandleCreateComment}
-                    className="heex-editor-submit-button"
-                >
-                    {loading ? (
-                        <FaSpinner className="spinner" />
-                    ) : (
-                        <FaPaperPlane />
-                    )}
-                </button>
+            <div className="right">
+                <div className="heex-editor-header">
+                    <input
+                        className="heex-commenter-info"
+                        placeholder="Username"
+                        name="username"
+                    />
+                    <input
+                        className="heex-commenter-info"
+                        placeholder="Email"
+                        name="email"
+                    />
+                </div>
+                <div className="heex-editor-body">
+                    <textarea required name="commentContent" />
+                </div>
+                <div className="heex-editor-footer">
+                    <div className="footer-left">
+                        <FaImage size={"1.5rem"} color="#9EA6B6" />
+                        <FaLaugh size={"1.5rem"} color="#9EA6B6" />
+                    </div>
+                    <div className="footer-right">
+                        <HeexLogo />
+                        <button
+                            ref={submitButtonRef}
+                            onClick={debouncedHandleCreateComment}
+                            className="heex-editor-submit-button"
+                        >
+                            {loading ? (
+                                <FaSpinner
+                                    className="spinner"
+                                    size="1.5rem"
+                                    color="#fff"
+                                />
+                            ) : (
+                                "Comment"
+                            )}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
