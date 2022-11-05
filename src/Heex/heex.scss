@@ -141,12 +141,25 @@
                     .heex-logo-text {
                         font-style: normal;
                         font-weight: 400;
+                        color: #c2c9d6;
+
+                        margin-right: 0.25rem;
 
                         a,
                         a:visited {
-                            color: #074dda;
+                            color: #c2c9d6;
                             text-decoration: none;
                             margin-left: 4px;
+                        }
+                    }
+
+                    .heex-logo-svg {
+                        cursor: pointer;
+                        height: 100%;
+
+                        a {
+                            display: flex;
+                            align-items: center;
                         }
                     }
                 }
