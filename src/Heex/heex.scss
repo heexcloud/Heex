@@ -1,26 +1,3 @@
-@mixin comment-action {
-    display: flex;
-    justify-content: flex-end;
-
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 2em;
-
-        border-color: black;
-        border-style: solid;
-
-        margin-left: 0.5em;
-
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out;
-        &:hover {
-            transform: scale(1.3);
-        }
-    }
-}
-
 @mixin comment-header {
     width: 100%;
     display: flex;

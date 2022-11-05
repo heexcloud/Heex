@@ -1,7 +1,7 @@
 import React from "react";
 import { CommentEditor } from "../CommentEditor";
 import { format, query } from "../../utils";
-import { FaThumbsUp, FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { BsChatSquareText } from "react-icons/bs";
 import { useHeexContext, ACTION } from "../../context";
 import { useMemoizedFn } from "../../hooks";
