@@ -5,6 +5,7 @@ import { FaReply, FaThumbsUp, FaHeart } from "react-icons/fa";
 import { useHeexContext, ACTION } from "../../context";
 import { useMemoizedFn } from "../../hooks";
 import { useDebouncedCallback } from "use-debounce";
+import { Avatar } from "../_Simple";
 
 export const CommentItem = (props) => {
     const { comment, replyEditor, setReplyEditor, toggleReplyEditor } = props;
@@ -56,27 +57,26 @@ export const CommentItem = (props) => {
         }
     });
 
-    const debouncedThumbupComment = useDebouncedCallback(thumbupComment, 1000);
+    const debouncedThumbupComment = useDebouncedCallback(thumbupComment, 400);
 
     return (
         <div className="heex-comment-list-item" key={comment.objectId}>
-            <div className="heex-comment-thread-root">
-                <div className="thread-header">
-                    <div className="thread-meta">
+            <div className="left">
+                <Avatar />
+            </div>
+            <div className="right">
+                <div className="heex-comment-thread-root">
+                    <div className="thread-header">
                         <span>{comment.username}</span>
                         <span>{format.formatTime(comment.createdAt)}</span>
-                        {comment.likes && (
-                            <span className="heex-chip">
-                                <FaHeart />
-                                {comment.likes}
-                            </span>
-                        )}
                     </div>
-                    <div className="thread-action">
+                    <div className="thread-body">{comment.comment}</div>
+                    <div className="thread-footer">
                         <button
                             onClick={() => debouncedThumbupComment(comment)}
                         >
-                            <FaThumbsUp />
+                            <FaHeart />
+                            <span>{!!comment.likes && comment.likes}</span>
                         </button>
 
                         <button
@@ -90,70 +90,73 @@ export const CommentItem = (props) => {
                             <FaReply />
                         </button>
                     </div>
-                </div>
-                <div className="thread-body">{comment.comment}</div>
 
-                {renderCommentEditor(comment, null, comment.objectId)}
-            </div>
-            {comment.replies?.length > 0 && (
-                <div className="heex-comment-thread-reply">
-                    {comment.replies.map((reply) => {
-                        return (
-                            <div
-                                className="heex-comment-thread-reply-item"
-                                key={reply.objectId}
-                            >
-                                <div className="reply-header">
-                                    <div className="reply-meta">
-                                        <span>{reply.username}</span>
-                                        <span>
-                                            {format.formatTime(reply.createdAt)}
-                                        </span>
-                                        {reply.likes && (
-                                            <span className="heex-chip">
-                                                <FaHeart />
-                                                {reply.likes}
+                    {renderCommentEditor(comment, null, comment.objectId)}
+                </div>
+                {comment.replies?.length > 0 && (
+                    <div className="heex-comment-thread-reply">
+                        {comment.replies.map((reply) => {
+                            return (
+                                <div
+                                    className="heex-comment-thread-reply-item"
+                                    key={reply.objectId}
+                                >
+                                    <div className="reply-header">
+                                        <div className="reply-meta">
+                                            <span>{reply.username}</span>
+                                            <span>
+                                                {format.formatTime(
+                                                    reply.createdAt
+                                                )}
                                             </span>
-                                        )}
+                                            {reply.likes && (
+                                                <span className="heex-chip">
+                                                    <FaHeart />
+                                                    {reply.likes}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <div className="reply-action">
+                                            <button
+                                                onClick={() =>
+                                                    debouncedThumbupComment(
+                                                        reply
+                                                    )
+                                                }
+                                            >
+                                                <FaThumbsUp />
+                                            </button>
+
+                                            <button
+                                                onClick={() =>
+                                                    toggleReplyEditor({
+                                                        cid: reply.objectId,
+                                                        at: reply.username,
+                                                    })
+                                                }
+                                            >
+                                                <FaReply />
+                                            </button>
+                                        </div>
                                     </div>
 
-                                    <div className="reply-action">
-                                        <button
-                                            onClick={() =>
-                                                debouncedThumbupComment(reply)
-                                            }
-                                        >
-                                            <FaThumbsUp />
-                                        </button>
-
-                                        <button
-                                            onClick={() =>
-                                                toggleReplyEditor({
-                                                    cid: reply.objectId,
-                                                    at: reply.username,
-                                                })
-                                            }
-                                        >
-                                            <FaReply />
-                                        </button>
+                                    <div className="reply-body">
+                                        <span>{`@${reply.at}: `}</span>
+                                        {reply.comment}
                                     </div>
-                                </div>
 
-                                <div className="reply-body">
-                                    <span>{`@${reply.at}: `}</span>
-                                    {reply.comment}
+                                    {renderCommentEditor(
+                                        comment,
+                                        reply,
+                                        reply.objectId
+                                    )}
                                 </div>
-
-                                {renderCommentEditor(
-                                    comment,
-                                    reply,
-                                    reply.objectId
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
