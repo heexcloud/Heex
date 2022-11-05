@@ -128,14 +128,14 @@ export const CommentItem = (props) => {
                                                     )
                                                 }
                                             >
-                                                {!!comment.likes ? (
+                                                {!!reply.likes ? (
                                                     <FaHeart />
                                                 ) : (
                                                     <FaRegHeart />
                                                 )}
                                                 <span>
-                                                    {!!comment.likes &&
-                                                        comment.likes}
+                                                    {!!reply.likes &&
+                                                        reply.likes}
                                                 </span>
                                             </button>
 
