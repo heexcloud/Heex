@@ -1,7 +1,8 @@
 import React from "react";
 import { CommentEditor } from "../CommentEditor";
 import { format, query } from "../../utils";
-import { FaReply, FaThumbsUp, FaHeart } from "react-icons/fa";
+import { FaThumbsUp, FaHeart, FaRegHeart } from "react-icons/fa";
+import { BsChatSquareText } from "react-icons/bs";
 import { useHeexContext, ACTION } from "../../context";
 import { useMemoizedFn } from "../../hooks";
 import { useDebouncedCallback } from "use-debounce";
@@ -75,7 +76,7 @@ export const CommentItem = (props) => {
                         <button
                             onClick={() => debouncedThumbupComment(comment)}
                         >
-                            <FaHeart />
+                            {!!comment.likes ? <FaHeart /> : <FaRegHeart />}
                             <span>{!!comment.likes && comment.likes}</span>
                         </button>
 
@@ -87,7 +88,7 @@ export const CommentItem = (props) => {
                                 })
                             }
                         >
-                            <FaReply />
+                            <BsChatSquareText />
                         </button>
                     </div>
 
@@ -136,7 +137,7 @@ export const CommentItem = (props) => {
                                                     })
                                                 }
                                             >
-                                                <FaReply />
+                                                <BsChatSquareText />
                                             </button>
                                         </div>
                                     </div>
