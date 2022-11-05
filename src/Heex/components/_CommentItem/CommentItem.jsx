@@ -95,30 +95,32 @@ export const CommentItem = (props) => {
                     {renderCommentEditor(comment, null, comment.objectId)}
                 </div>
                 {comment.replies?.length > 0 && (
-                    <div className="heex-comment-thread-reply">
+                    <div className="heex-comment-thread-reply-list">
                         {comment.replies.map((reply) => {
                             return (
                                 <div
                                     className="heex-comment-thread-reply-item"
                                     key={reply.objectId}
                                 >
-                                    <div className="reply-header">
-                                        <div className="reply-meta">
+                                    <div className="reply-left">
+                                        <Avatar />
+                                    </div>
+                                    <div className="reply-right">
+                                        <div className="reply-header">
                                             <span>{reply.username}</span>
                                             <span>
                                                 {format.formatTime(
                                                     reply.createdAt
                                                 )}
                                             </span>
-                                            {reply.likes && (
-                                                <span className="heex-chip">
-                                                    <FaHeart />
-                                                    {reply.likes}
-                                                </span>
-                                            )}
                                         </div>
 
-                                        <div className="reply-action">
+                                        <div className="reply-body">
+                                            <span>{`@${reply.at}: `}</span>
+                                            {reply.comment}
+                                        </div>
+
+                                        <div className="reply-footer">
                                             <button
                                                 onClick={() =>
                                                     debouncedThumbupComment(
@@ -126,7 +128,15 @@ export const CommentItem = (props) => {
                                                     )
                                                 }
                                             >
-                                                <FaThumbsUp />
+                                                {!!comment.likes ? (
+                                                    <FaHeart />
+                                                ) : (
+                                                    <FaRegHeart />
+                                                )}
+                                                <span>
+                                                    {!!comment.likes &&
+                                                        comment.likes}
+                                                </span>
                                             </button>
 
                                             <button
@@ -140,18 +150,13 @@ export const CommentItem = (props) => {
                                                 <BsChatSquareText />
                                             </button>
                                         </div>
-                                    </div>
 
-                                    <div className="reply-body">
-                                        <span>{`@${reply.at}: `}</span>
-                                        {reply.comment}
+                                        {renderCommentEditor(
+                                            comment,
+                                            reply,
+                                            reply.objectId
+                                        )}
                                     </div>
-
-                                    {renderCommentEditor(
-                                        comment,
-                                        reply,
-                                        reply.objectId
-                                    )}
                                 </div>
                             );
                         })}
