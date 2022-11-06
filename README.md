@@ -1,8 +1,9 @@
 ### Heex
 
 -   yet another commenting system
--   Heex means HEated EXchange, since people tend to do it on Internet, but I do hope we could have civilized conversations
--   it has a very flexible architecture. For example, you can override the default styles, and you have plenty of options for api server implementations
+-   Heex means `HEated EXchange`
+-   JS and CSS separation, so that you can override the default styles
+-   Cross-platform client libraries for web, iOS, Android and desktop apps
 
 ---
 
