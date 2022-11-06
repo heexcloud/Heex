@@ -33,22 +33,27 @@ export const getCommentCount = async function () {
     return 0;
 };
 
-export const getComments = async function (param) {
+export const getComments = async function (params) {
     try {
         const pageId = window.location.pathname;
         const { apiBaseUrl, clientId } = window.HeexOptions;
-        const { limit } = param || {};
-        const params = new URLSearchParams({
+        const { limit, skip } = params || {};
+        const urlSearchParams = new URLSearchParams({
             pageId,
             clientId,
         });
 
-        // limit could be 0 when there is no comment at all
-        if (limit !== undefined && limit > 0) {
-            params.append("limit", limit);
+        if (limit) {
+            urlSearchParams.append("limit", limit);
         }
 
-        const response = await fetch(`${apiBaseUrl}/api/v1/comments?${params}`);
+        if (skip) {
+            urlSearchParams.append("skip", skip);
+        }
+
+        const response = await fetch(
+            `${apiBaseUrl}/api/v1/comments?${urlSearchParams}`
+        );
         const json = await response.json();
         return json.data.comments;
     } catch (err) {
