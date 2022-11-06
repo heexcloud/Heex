@@ -37,7 +37,7 @@ export const getComments = async function (params) {
     try {
         const pageId = window.location.pathname;
         const { apiBaseUrl, clientId } = window.HeexOptions;
-        const { limit, skip } = params || {};
+        const { limit, offset } = params || {};
         const urlSearchParams = new URLSearchParams({
             pageId,
             clientId,
@@ -47,8 +47,8 @@ export const getComments = async function (params) {
             urlSearchParams.append("limit", limit);
         }
 
-        if (skip) {
-            urlSearchParams.append("skip", skip);
+        if (offset) {
+            urlSearchParams.append("offset", offset);
         }
 
         const response = await fetch(

@@ -43,7 +43,7 @@ export const CommentList = () => {
 
     const handleLoadMore = () => {
         query
-            .getComments({ limit: 25, skip: 25 * state.page })
+            .getComments({ limit: 25, offset: 25 * state.page })
             .then((comments) => {
                 dispatch({
                     type: ACTION.APPEND_COMMENTS,
