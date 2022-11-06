@@ -7,7 +7,7 @@
 
 ---
 
-[![](https://data.jsdelivr.com/v1/package/npm/heex/badge)](https://www.jsdelivr.com/package/npm/heex)
+[![](https://img.shields.io/jsdelivr/npm/hw/heex?label=jsDelivr%20hits&style=flat-square)](https://www.jsdelivr.com/package/npm/heex)
 
 ### Documentation
 
