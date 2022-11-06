@@ -3,6 +3,7 @@ import { query } from "../../utils";
 import { ACTION, useHeexContext } from "../../context";
 import { useMemoizedFn } from "../../hooks";
 import { CommentItem } from "../_CommentItem";
+import { FaAngleDown } from "react-icons/fa";
 
 export const CommentList = () => {
     const { state, dispatch } = useHeexContext();
@@ -71,7 +72,9 @@ export const CommentList = () => {
                 );
             })}
             {state.commentCount > state.page * 25 && (
-                <button onClick={handleLoadMore}>Show More Replies</button>
+                <button onClick={handleLoadMore} className="load-more-button">
+                    Show More Replies <FaAngleDown size="1.25rem" />
+                </button>
             )}
         </div>
     );
