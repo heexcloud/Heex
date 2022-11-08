@@ -7,9 +7,9 @@
 
 ---
 
-[![](https://img.shields.io/jsdelivr/npm/hm/heex?label=Heex%20jsDelivr%20hits&style=flat-square)](https://www.jsdelivr.com/package/npm/heex)
+[![](https://img.shields.io/jsdelivr/npm/hm/heex?label=Heex%20jsDelivr%20hits&style=social)](https://www.jsdelivr.com/package/npm/heex) [![](https://img.shields.io/github/stars/heexcloud/heex?label=Heex%20Stars&style=social)](https://github/stars/heexcloud/heex)
 
-[![](https://img.shields.io/npm/dm/@heex/react?label=%40heex%2Freact%20NPM%20downloads&style=flat-square)](https://www.npmjs.com/package/@heex/react)
+[![](https://img.shields.io/npm/dm/@heex/react?label=%40heex%2Freact%20NPM%20downloads&style=social)](https://www.npmjs.com/package/@heex/react) [![](https://img.shields.io/github/stars/heexcloud/heex-react?label=%40heex%2Freact%20Stars&style=social)](https://github/stars/heexcloud/heex-react)
 
 ### Documentation
 
