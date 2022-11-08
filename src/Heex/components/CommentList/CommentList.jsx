@@ -41,7 +41,7 @@ export const CommentList = () => {
         });
     }, []);
 
-    const handleLoadMore = () => {
+    const handleLoadMore = useMemoizedFn(() => {
         query
             .getComments({ limit: 25, offset: 25 * state.page })
             .then((comments) => {
@@ -56,11 +56,24 @@ export const CommentList = () => {
                     type: ACTION.PAGE_INCR,
                 });
             });
-    };
+    });
+
+    const sortFn = useMemoizedFn((a, b) => {
+        if (state.sortingMethod === "newest") {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        }
+
+        // hottest: thread's likes + number ofreplies (does not count replies' likes)
+        // and 1 reply equals two likes, reply has more weight than like
+        const aHotness = (a.likes || 0) + (a.replies?.length || 0) * 2;
+        const bHotness = (b.likes || 0) + (b.replies?.length || 0) * 2;
+
+        return bHotness - aHotness;
+    });
 
     return (
         <div className="heex-comment-list">
-            {state.comments.map((comment) => {
+            {state.comments.sort(sortFn).map((comment) => {
                 return (
                     <CommentItem
                         key={comment.objectId}

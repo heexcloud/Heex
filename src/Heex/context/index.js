@@ -7,7 +7,12 @@ import { getComments, getCommentById } from "../utils/query";
 
 const HeexContext = createContext();
 
-const initialState = { page: 1, commentCount: 0, comments: [] };
+const initialState = {
+    page: 1,
+    commentCount: 0,
+    comments: [],
+    sortingMethod: "newest",
+};
 
 const HeexContextProvider = (props) => {
     const { children } = props;

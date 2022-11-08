@@ -38,6 +38,12 @@ export const reducer = (state, action) => {
             thread.replies[payload.replyIndex].likes = payload.likes;
             state.comments[payload.threadIndex] = thread;
             return { ...state }; // the destructor is a must
+        case ACTION.TOGGLE_SORTING_METHOD:
+            return {
+                ...state,
+                sortingMethod:
+                    state.sortingMethod === "newest" ? "hottest" : "newest",
+            };
         default:
             return state;
     }
