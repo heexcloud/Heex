@@ -1,11 +1,23 @@
-import React from "react";
-import { FcFlashOn } from "react-icons/fc";
+import React, { useEffect, useState } from "react";
+import { debounce } from "../../utils";
 
 export const HeexLogo = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const onResize = debounce(() => setWidth(window.innerWidth), 100);
+
+        window.addEventListener("resize", onResize);
+
+        return () => {
+            window.removeEventListener("resize", onResize);
+        };
+    }, []);
+
     return (
         <div className="heex-logo">
             <span className="heex-logo-text">
-                Powered by{" "}
+                {width > 600 && "Powered by"}
                 <a
                     href="https://heex.dev"
                     target="_blank"
