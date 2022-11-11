@@ -4,7 +4,7 @@ import { format, query } from "../../utils";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { BsChatSquareText } from "react-icons/bs";
 import { useHeexContext, ACTION } from "../../context";
-import { useMemoizedFn } from "../../hooks";
+import { useMemoizedFn } from "ahooks";
 import { useDebouncedCallback } from "use-debounce";
 import { Avatar } from "../_Simple";
 

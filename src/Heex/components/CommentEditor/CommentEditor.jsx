@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { query } from "../../utils";
-import { useMemoizedFn } from "../../hooks";
+import { useMemoizedFn } from "ahooks";
 import { FaPaperPlane, FaSpinner, FaImage, FaLaugh } from "react-icons/fa";
 import { useHeexContext } from "../../context";
 import { useDebouncedCallback } from "use-debounce";

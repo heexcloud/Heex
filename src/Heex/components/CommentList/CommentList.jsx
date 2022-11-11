@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { query } from "../../utils";
 import { ACTION, useHeexContext } from "../../context";
-import { useMemoizedFn } from "../../hooks";
+import { useMemoizedFn } from "ahooks";
 import { CommentItem } from "../_CommentItem";
 import { FaAngleDown } from "react-icons/fa";
 
