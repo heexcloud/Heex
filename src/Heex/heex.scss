@@ -91,6 +91,7 @@
     .right {
         height: 100%;
         flex-grow: 1;
+        min-width: 0;
 
         .heex-editor-header {
             width: 100%;
@@ -103,6 +104,7 @@
             .heex-commenter-info {
                 height: 2rem;
                 text-indent: 8px;
+                min-width: 0;
 
                 border: none;
                 outline: none;
@@ -139,6 +141,7 @@
 
         .heex-editor-footer {
             width: 100%;
+
             height: 2rem;
 
             margin-top: 0.5rem;
@@ -161,10 +164,13 @@
 
             .footer-right {
                 height: 100%;
+                min-width: 0;
+
                 display: flex;
 
                 .heex-logo {
                     height: 100%;
+                    min-width: 0;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -206,6 +212,7 @@
                     background-color: #074dda;
                     height: 2rem;
                     width: 6.75rem;
+                    min-width: 0;
                     color: #fff;
 
                     font-style: normal;
@@ -235,6 +242,7 @@
 
         height: 100%;
         width: fit-content;
+        min-width: 0;
     }
 
     .heex-comment-sort {
