@@ -8,7 +8,7 @@
 
 ### Documentation
 
--   [English](https://heex.jekyllcloud.com)
+-   [English](https://heex.dev)
 
 ### Community
 
