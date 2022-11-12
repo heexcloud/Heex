@@ -12,7 +12,7 @@
 
 ### Community
 
--   [Github Discussions](https://github.com/JekyllCloud/Heex/discussions)
+-   [Github Discussions](https://github.com/HeexCloud/Heex/discussions)
 
 ### License
 
