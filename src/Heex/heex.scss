@@ -74,7 +74,7 @@
 .heex-container {
     @include flex(column);
     width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .heex-comment-editor {
