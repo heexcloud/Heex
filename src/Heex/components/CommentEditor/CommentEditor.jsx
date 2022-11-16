@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { query } from "../../utils";
 import { useMemoizedFn } from "ahooks";
-import { FaPaperPlane, FaSpinner, FaImage, FaLaugh } from "react-icons/fa";
+import { FaSpinner, FaImage, FaLaugh } from "react-icons/fa";
 import { useHeexContext } from "../../context";
 import { useDebouncedCallback } from "use-debounce";
 import { Avatar, HeexLogo } from "../_Simple";

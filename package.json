@@ -21,7 +21,8 @@
         "watch-css": "sass --watch ./src/Heex/heex.scss ./dist/heex.css --no-source-map --error-css --color",
         "watch": "concurrently \"yarn:watch-js\" \"yarn:watch-css\"",
         "serve": "serve .",
-        "release": "release-it"
+        "release": "release-it",
+        "format": "prettier --write ./src "
     },
     "dependencies": {
         "ahooks": "^3.7.2",
@@ -40,6 +41,7 @@
         "@rollup/plugin-node-resolve": "^15.0.0",
         "@rollup/plugin-replace": "^5.0.0",
         "concurrently": "^7.5.0",
+        "prettier": "^2.7.1",
         "release-it": "^15.5.0",
         "rollup": "^3.0.0",
         "rollup-plugin-bundle-size": "^1.0.3",
