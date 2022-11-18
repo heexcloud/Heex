@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { CommentEditor, CommentList, CommentMeta } from "./components";
 import { HeexContextProvider } from "./context";
 import { fetchAnonymousToken } from "./utils/query";
+import { validate } from "./utils";
 
 export const Heex = ({ options }) => {
     if (typeof window !== "undefined") {
+        validate.options(options);
         window.HeexOptions = options;
     }
 
