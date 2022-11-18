@@ -207,6 +207,7 @@
                 }
 
                 .heex-editor-submit-button {
+                    @include flex-center;
                     border: none;
                     outline: none;
                     background-color: #074dda;

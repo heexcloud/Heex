@@ -1,13 +1,26 @@
+const heexHttpPost = (url, bodyObject) => {
+    let headers = {
+        "Content-Type": "application/json",
+    };
+
+    if (window.HeexOptions.auth.use === "anonymous") {
+        headers = { ...headers, "X-Heex": window.HeexOptions.auth.token };
+    }
+    return fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(bodyObject),
+    });
+};
+
 export const createComment = async function (payload) {
     const { clientName, clientId, apiBaseUrl } = window.HeexOptions;
 
     try {
-        const response = await fetch(`${apiBaseUrl}/api/v1/comment`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ ...payload, clientName, clientId }),
+        const response = await heexHttpPost(`${apiBaseUrl}/comment`, {
+            ...payload,
+            clientName,
+            clientId,
         });
 
         const json = await response.json();
@@ -23,7 +36,7 @@ export const getCommentCount = async function () {
     try {
         const pageId = window.location.pathname;
         const response = await fetch(
-            `${apiBaseUrl}/api/v1/comment/count?pageId=${pageId}&clientId=${clientId}`
+            `${apiBaseUrl}/comment/count?pageId=${pageId}&clientId=${clientId}`
         );
         const json = await response.json();
         return json.data.count;
@@ -52,7 +65,7 @@ export const getComments = async function (params) {
         }
 
         const response = await fetch(
-            `${apiBaseUrl}/api/v1/comments?${urlSearchParams}`
+            `${apiBaseUrl}/comments?${urlSearchParams}`
         );
         const json = await response.json();
         return json.data.comments;
@@ -65,17 +78,11 @@ export const thumbupComment = async function (comment) {
     const { apiBaseUrl } = window.HeexOptions;
 
     try {
-        const response = await fetch(
-            `${apiBaseUrl}/api/v1/comment/${comment.objectId}`,
+        const response = await heexHttpPost(
+            `${apiBaseUrl}/comment/${comment.objectId}`,
             {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    operation: "thumbup",
-                    likes: (comment.likes || 0) + 1,
-                }),
+                operation: "thumbup",
+                likes: (comment.likes || 0) + 1,
             }
         );
 
@@ -92,9 +99,20 @@ export const thumbupComment = async function (comment) {
 export const getCommentById = async function (cid) {
     const { apiBaseUrl } = window.HeexOptions;
     try {
-        const response = await fetch(`${apiBaseUrl}/api/v1/comment/${cid}`);
+        const response = await fetch(`${apiBaseUrl}/comment/${cid}`);
         const json = await response.json();
         return json.data; // comment and its replies
+    } catch (err) {
+        console.error("err :>> ", err);
+    }
+};
+
+export const fetchAnonymousToken = async function () {
+    const { apiBaseUrl } = window.HeexOptions;
+    try {
+        const response = await fetch(`${apiBaseUrl}/anonymous/token`);
+        const json = await response.json();
+        window.HeexOptions.auth.token = json.data.token;
     } catch (err) {
         console.error("err :>> ", err);
     }

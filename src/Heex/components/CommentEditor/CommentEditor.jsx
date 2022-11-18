@@ -82,16 +82,20 @@ export const CommentEditor = (props) => {
             </div>
             <div className="right">
                 <div className="heex-editor-header">
-                    <input
-                        className="heex-commenter-info"
-                        placeholder="Username"
-                        name="username"
-                    />
-                    <input
-                        className="heex-commenter-info"
-                        placeholder="Email"
-                        name="email"
-                    />
+                    {window.HeexOptions.auth.use === "anonymous" ? (
+                        <React.Fragment>
+                            <input
+                                className="heex-commenter-info"
+                                placeholder="Username"
+                                name="username"
+                            />
+                            <input
+                                className="heex-commenter-info"
+                                placeholder="Email"
+                                name="email"
+                            />
+                        </React.Fragment>
+                    ) : null}
                 </div>
                 <div className="heex-editor-body">
                     <textarea required name="commentContent" />
