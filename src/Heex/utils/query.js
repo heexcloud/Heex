@@ -1,3 +1,5 @@
+import * as HeexOptionsCenter from "./HeexOptionsCenter";
+
 const heexHttpPost = (url, bodyObject) => {
     let headers = {
         "Content-Type": "application/json",
@@ -112,7 +114,7 @@ export const fetchAnonymousToken = async function () {
     try {
         const response = await fetch(`${apiBaseUrl}/anonymous/token`);
         const json = await response.json();
-        window.HeexOptions.auth.token = json.data.token;
+        HeexOptionsCenter.assignAuthToken(json.data.token);
     } catch (err) {
         console.error("err :>> ", err);
     }
