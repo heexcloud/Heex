@@ -61,11 +61,14 @@
         <script src="../dist/heex.js"></script>
         <link rel="stylesheet" type="text/css" href="../dist/heex.css" />
         <script>
-            // Heex.init({
-            //     apiBaseUrl: "http://localhost:8080/api/v1",
-            // });
+            Heex.init({
+                apiBaseUrl: "http://localhost:8080/api/v1",
+                // apiBaseUrl: "https://api.heex.dev/api/v1",
+                clientName: "heex-firebase-dogfooding",
+                clientId: "aGVleC1maXJlYmFzZS1kb2dmb29kaW5n", // just some random string so that api knows which is which
+            });
 
-            Heex.init();
+            // Heex.init();
         </script>
     </body>
 </html>

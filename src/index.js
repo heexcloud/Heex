@@ -4,9 +4,6 @@ import { Heex } from "./Heex";
 
 const defaultOptions = {
     rootElement: "#heex",
-    apiBaseUrl: "https://api.heex.dev/api/v1",
-    clientName: "heex-dogfooding",
-    clientId: "aGVleC1kb2dmb29kaW5n", // just some random string so that api knows which is which
     auth: {
         use: "anonymous",
     },
