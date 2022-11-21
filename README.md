@@ -5,6 +5,9 @@
     <a href="https://heex.dev" target="_blank">
         <img src="https://img.shields.io/badge/Documentation-1081c1?logo=read-the-docs" alt="Docs">
     </a>
+    <a href="https://cn.heex.dev" target="_blank">
+        <img src="https://img.shields.io/badge/中文文档-1081c1?logo=read-the-docs" alt="Docs">
+    </a>
     <a href="http://github.com/heexcloud/heex" target="_blank">
         <img src="https://img.shields.io/github/stars/heexcloud/heex?logo=github" alt="Github Stars">
     </a>
