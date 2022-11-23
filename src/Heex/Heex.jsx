@@ -4,7 +4,7 @@ import { HeexContextProvider } from "./context";
 import { fetchAnonymousToken } from "./utils/query";
 import { validate, HeexOptionsCenter } from "./utils";
 
-export const Heex = ({ options }) => {
+export const Heex = ({ options, pageId }) => {
     if (typeof window !== "undefined") {
         validate.options(options);
         HeexOptionsCenter.assignHeexOptions(options);
@@ -18,7 +18,7 @@ export const Heex = ({ options }) => {
 
     return (
         <div className="heex-container">
-            <HeexContextProvider>
+            <HeexContextProvider pageId={pageId}>
                 <CommentEditor isTopLevel />
                 <CommentMeta />
                 <CommentList />

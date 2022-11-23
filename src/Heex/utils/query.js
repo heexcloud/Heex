@@ -21,6 +21,7 @@ export const createComment = async function (payload) {
     try {
         const response = await heexHttpPost(`${apiBaseUrl}/comment`, {
             ...payload,
+            pageId: payload.pageId || window.location.pathname,
             clientName,
             clientId,
         });
@@ -32,13 +33,13 @@ export const createComment = async function (payload) {
     }
 };
 
-export const getCommentCount = async function () {
+export const getCommentCount = async function ({ pageId }) {
     const { clientId, apiBaseUrl } = window.HeexOptions;
 
     try {
-        const pageId = window.location.pathname;
+        const _pageId = pageId || window.location.pathname;
         const response = await fetch(
-            `${apiBaseUrl}/comment/count?pageId=${pageId}&clientId=${clientId}`
+            `${apiBaseUrl}/comment/count?pageId=${_pageId}&clientId=${clientId}`
         );
         const json = await response.json();
         return json.data.count;
@@ -50,11 +51,11 @@ export const getCommentCount = async function () {
 
 export const getComments = async function (params) {
     try {
-        const pageId = window.location.pathname;
+        const { limit, offset, pageId } = params || {};
+        const _pageId = pageId || window.location.pathname;
         const { apiBaseUrl, clientId } = window.HeexOptions;
-        const { limit, offset } = params || {};
         const urlSearchParams = new URLSearchParams({
-            pageId,
+            pageId: _pageId,
             clientId,
         });
 
