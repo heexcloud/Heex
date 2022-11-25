@@ -15,13 +15,13 @@ const initialState = {
 };
 
 const HeexContextProvider = (props) => {
-    const { children } = props;
+    const { children, pageId } = props;
 
-    const [state, dispatch] = useReducer(reducer, { ...initialState });
+    const [state, dispatch] = useReducer(reducer, { ...initialState, pageId });
 
     const refreshCommentsWithLimit = useMemoizedFn(async () => {
         // limit is the current number of comments, no need to fetch all
-        const comments = await getComments({ limit: 25 });
+        const comments = await getComments({ limit: 25, pageId: state.pageId });
         if (comments !== undefined) {
             dispatch({
                 type: ACTION.SET_COMMENTS,

@@ -12,7 +12,7 @@ export const CommentEditor = (props) => {
 
     const [loading, setLoading] = useState(false);
     const submitButtonRef = useRef();
-    const { refreshCommentsWithLimit, refreshThread } = useHeexContext();
+    const { refreshCommentsWithLimit, refreshThread, state } = useHeexContext();
 
     const editorId = reply?.objectId || thread?.objectId || "Heex";
 
@@ -38,7 +38,7 @@ export const CommentEditor = (props) => {
         const result = await query.createComment({
             username,
             email,
-            pageId: window.location.pathname,
+            pageId: state.pageId,
             comment: commentContent,
             tid: thread?.objectId,
             rid: reply?.objectId,

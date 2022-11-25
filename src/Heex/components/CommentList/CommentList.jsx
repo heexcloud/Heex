@@ -21,8 +21,8 @@ export const CommentList = () => {
         // * leancloud can get count and comments in one query,
         // * but I am not sure whether other database can do that too
         Promise.all([
-            query.getCommentCount(),
-            query.getComments({ limit: 25 }),
+            query.getCommentCount({ pageId: state.pageId }),
+            query.getComments({ limit: 25, pageId: state.pageId }),
         ]).then((res) => {
             const [count, comments] = res;
 
@@ -43,7 +43,11 @@ export const CommentList = () => {
 
     const handleLoadMore = useMemoizedFn(() => {
         query
-            .getComments({ limit: 25, offset: state.commentCount })
+            .getComments({
+                limit: 25,
+                offset: state.commentCount,
+                pageId: state.pageId,
+            })
             .then((comments) => {
                 dispatch({
                     type: ACTION.APPEND_COMMENTS,

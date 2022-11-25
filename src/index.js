@@ -5,7 +5,7 @@ import { Heex } from "./Heex";
 const defaultOptions = {
     rootElement: "#heex",
     auth: {
-        use: "anonymous",
+        use: "anonymous", // 'heex', 'host', 'anonymous'
     },
 };
 
