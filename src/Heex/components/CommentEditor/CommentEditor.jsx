@@ -14,7 +14,11 @@ export const CommentEditor = (props) => {
     const submitButtonRef = useRef();
     const { refreshCommentsWithLimit, refreshThread, state } = useHeexContext();
 
-    const editorId = reply?.objectId || thread?.objectId || "Heex";
+    const editorId =
+        reply?.objectId ||
+        thread?.objectId ||
+        state.pageId /** multiple Heex instances */ ||
+        "Heex"; /** single Heex instance */
 
     const handleCreateComment = useMemoizedFn(async () => {
         setLoading(true);
